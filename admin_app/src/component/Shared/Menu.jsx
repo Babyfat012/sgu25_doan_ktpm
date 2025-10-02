@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     NavLink,
     Redirect
@@ -8,122 +8,79 @@ import { AuthContext } from '../context/Auth'
 function Menu() {
     const { user, jwt } = useContext(AuthContext);
 
-    const [menu, setMenu] = useState([
-        {
-            item: "Customer",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "Coupon",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "Product",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "Sale",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "Category",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "Order",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "ConfirmOrder",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "Delivery",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "ConfirmDelivery",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "CompletedOrder",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "CancelOrder",
-            permission: "Nhân Viên"
-        },
-        {
-            item: "User",
-            permission: "Admin"
-        },
-        {
-            item: "Permission",
-            permission: "Admin"
-        }
-        // "Category", ,
-        // "Permission",
-        // "User",
-        // "Order",
-        // "ConfirmOrder",
-        // "Delivery",
-        // "ConfirmDelivery",   
-        // "CompletedOrder",
-        // "CancelOrder"
+    const [menu] = useState([
+        { item: "Customer" },
+        { item: "Coupon" },
+        { item: "Product" },
+        { item: "Sale" },
+        { item: "Category" },
+        { item: "Order" },
+        { item: "ConfirmOrder" },
+        { item: "Delivery" },
+        { item: "ConfirmDelivery" },
+        { item: "CompletedOrder" },
+        { item: "CancelOrder" },
+        { item: "User" },
+        { item: "Permission" }
     ])
+
     let { pathname } = window.location;
+
+    // Nếu chưa login thì redirect
+    if (!jwt || !user) {
+        return <Redirect to="/" />;
+    }
+
+    // Nếu không phải Admin thì cũng redirect (chặn login admin)
+    if (user.id_permission.permission !== "Admin") {
+        return <Redirect to="/" />;
+    }
+
+    // Nếu là Admin thì hiển thị toàn bộ menu
     return (
-        <div>
-            {
-                jwt && user ?
-                    (
-                        <aside className="left-sidebar" data-sidebarbg="skin6">
-                            <div className="scroll-sidebar" data-sidebarbg="skin6">
-                                <nav className="sidebar-nav">
-                                    <ul id="sidebarnav">
+        <aside className="left-sidebar" data-sidebarbg="skin6">
+            <div className="scroll-sidebar" data-sidebarbg="skin6">
+                <nav className="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li className="list-divider"></li>
+                        
+                        <li className="sidebar-item">
+                            <NavLink 
+                                to="/dashboard" 
+                                className="sidebar-link"
+                                activeClassName="active"
+                            >
+                                <i data-feather="home" className="feather-icon"></i>
+                                <span className="hide-menu">Dashboard</span>
+                            </NavLink>
+                        </li>
+                        
+                        <li className="list-divider"></li>
+                        <li className="nav-small-cap"><span className="hide-menu">Management</span></li>
 
-                                        <li className="list-divider"></li>
-
-                                        <li className="nav-small-cap"><span className="hide-menu">Components</span></li>
-
-
-                                        <li className="sidebar-item"> <a className="sidebar-link has-arrow" href="#"
-                                            aria-expanded="false"><i data-feather="grid" className="feather-icon"></i><span
-                                                className="hide-menu">Tables </span></a>
-                                            <ul aria-expanded="false" className="collapse  first-level base-level-line">
-                                                {
-                                                    menu && menu.map((item, index) => (
-                                                        (
-                                                            <li className="sidebar-item active" key={index}>
-                                                                {
-                                                                    item.permission === user.id_permission.permission ?
-                                                                        (
-                                                                            <NavLink to={"/" + item.item.toLowerCase()} className="sidebar-link">
-                                                                                {item.item}
-                                                                            </NavLink>
-                                                                        ) :
-                                                                        (
-                                                                            <div></div>
-                                                                        )
-                                                                }
-                                                            </li>
-                                                        )
-                                                    ))
-                                                }
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </aside>
-                    ) :
-                    (
-                        <Redirect to="/" />
-                    )
-            }
-        </div>
-
-
+                        <li className="sidebar-item">
+                            <a className="sidebar-link has-arrow" href="#" onClick={(e) => e.preventDefault()}
+                                aria-expanded="false"><i data-feather="grid" className="feather-icon"></i>
+                                <span className="hide-menu">Menu Quản Lý</span>
+                            </a>
+                            <ul aria-expanded="false" className="collapse first-level base-level-line">
+                                {menu.map((item, index) => (
+                                    <li className="sidebar-item" key={index}>
+                                        <NavLink 
+                                            to={"/" + item.item.toLowerCase()} 
+                                            className="sidebar-link"
+                                            activeClassName="active"
+                                        >
+                                            <span className="hide-menu">{item.item}</span>
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
     );
 }
 

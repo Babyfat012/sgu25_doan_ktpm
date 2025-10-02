@@ -136,6 +136,10 @@ function Cart(props) {
 
     const [errorCode, setErrorCode] = useState(false)
 
+    const [notEligible, setNotEligible] = useState(false) // Thêm state cho không đủ điều kiện
+
+    const [couponRequirement, setCouponRequirement] = useState('') // Thêm state để lưu yêu cầu coupon
+
     const handlerCoupon = async (e) => {
 
         e.preventDefault()
@@ -146,24 +150,59 @@ function Cart(props) {
 
             const params = {
                 id_user: sessionStorage.getItem('id_user'),
-                code: coupon
+                code: coupon,
+                total_amount: total_price // Thêm tổng tiền vào params
             }
 
             const query = '?' + queryString.stringify(params)
 
+            console.log('=== CLIENT COUPON DEBUG ===')
+            console.log('Gửi request với params:', params)
+            console.log('Query string:', query)
+
             const response = await CouponAPI.checkCoupon(query)
+
+            console.log('Response nhận được:', response)
+            console.log('Response.coupon:', response.coupon)
+            if (response.coupon) {
+                console.log('Promotion value:', response.coupon.promotion)
+                console.log('Promotion type:', typeof response.coupon.promotion)
+            }
 
             if (response.msg === 'Không tìm thấy'){
                 setErrorCode(true)
             }else if (response.msg === 'Bạn đã sử dụng mã này rồi'){
                 setErrorCode(true)
+            }else if (response.msg === 'Không đủ điều kiện'){
+                // Xử lý trường hợp không đủ điều kiện
+                setNotEligible(true)
+                setCouponRequirement(response.errorMessage || response.describe || 'Không đủ điều kiện áp dụng coupon này')
             }else{
                 localStorage.setItem('id_coupon', response.coupon._id)
                 localStorage.setItem('coupon', JSON.stringify(response.coupon))
 
-                setDiscount((total_price * response.coupon.promotion) / 100)
+                // Chuyển promotion từ string sang number - hỗ trợ nhiều format
+                let promotionPercent = 0
+                const promotionStr = response.coupon.promotion.toString()
+                
+                // Tìm số trong string (hỗ trợ "50%", "Giảm 20%", "20", v.v.)
+                const numberMatch = promotionStr.match(/\d+(\.\d+)?/)
+                if (numberMatch) {
+                    promotionPercent = parseFloat(numberMatch[0])
+                }
 
-                const newTotal = total_price - ((total_price * response.coupon.promotion) / 100)
+                const discountAmount = (total_price * promotionPercent) / 100
+
+                console.log('Total price:', total_price)
+                console.log('Promotion string:', promotionStr)
+                console.log('Promotion percent extracted:', promotionPercent)
+                console.log('Discount amount:', discountAmount)
+
+                setDiscount(discountAmount)
+
+                const newTotal = total_price - discountAmount
+
+                console.log('New total:', newTotal)
 
                 set_new_price(newTotal)
                 set_show_success(true)
@@ -176,11 +215,24 @@ function Cart(props) {
             set_show_null_cart(false)
             set_show_success(false)
             setErrorCode(false)
+            setNotEligible(false) // Reset state không đủ điều kiện
         }, 1500)
     }
 
     return (
         <div>
+            {
+                notEligible &&
+                <div className="modal_success">
+                    <div className="group_model_success pt-3">
+                        <div className="text-center p-2">
+                            <i className="fa fa-exclamation-triangle fix_icon_bell" style={{ fontSize: '40px', color: '#fff', backgroundColor: '#f84545' }}></i>
+                        </div>
+                        <h4 className="text-center p-3" style={{ color: '#fff' }}>Không Đủ Điều Kiện!</h4>
+                        <p className="text-center pb-3" style={{ color: '#fff', fontSize: '14px' }}>{couponRequirement}</p>
+                    </div>
+                </div>
+            }
             {
                 errorCode &&
                 <div className="modal_success">

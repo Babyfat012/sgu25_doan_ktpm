@@ -236,7 +236,9 @@ function Header(props) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-md-4">
-                            <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+                            <ul className="list-unstyled mb-0">
+                                <li><span>Telephone Enquiry:</span><a href="tel:+123123321345">(+123) 123 321 345</a></li>
+                            </ul>
                         </div>
                         <div className="col-lg-9 col-md-8">
                             <ul className="d-flex justify-content-end" >
@@ -262,7 +264,7 @@ function Header(props) {
                                             <ul className="setting_ul collapse" id="collapseExample">
                                                 <li className="li_setting"><Link to={`/profile/${sessionStorage.getItem("id_user")}`}>Profile</Link></li>
                                                 <li className="li_setting"><Link to="/history">Order Status</Link></li>
-                                                <li className="li_setting"><a onClick={handler_logout} href="#">Log Out</a></li>
+                                                <li className="li_setting"><button type="button" className="btn btn-link p-0" onClick={handler_logout}>Log Out</button></li>
                                             </ul>
                                         ) : (
                                             <ul className="setting_ul collapse" id="collapseExample">

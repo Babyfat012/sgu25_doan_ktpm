@@ -8,7 +8,10 @@ var schema = new mongoose.Schema(
         },
         name_product: String,
         price_product: String,
-        image: String,
+        image: {
+            type: String,
+            required: [true, 'Hình ảnh sản phẩm là bắt buộc']
+        },
         describe: String,
         gender: String,
         // number: Number,

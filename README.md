@@ -1,3 +1,39 @@
+
+# Đồ án môn kiểm thử phần mềm
+
+## Thông tin chung
+- **Tên đề tài:** [Tên đề tài cần được thêm vào]
+- **Môn học:** Kiểm thử phần mềm
+- **Lớp:** [DCT122C3]
+
+## Thành viên nhóm
+1. Trịnh Long Phát
+2. Lê Hồng Phát 
+3. Trương Phú Kiệt
+4. Trà Đức Toàn
+
+## Mô tả dự án
+[Thêm mô tả ngắn về dự án và mục tiêu]
+
+## Công nghệ sử dụng
+- [Liệt kê các công nghệ/framework được sử dụng]
+
+## Cấu trúc dự án
+```
+project/
+├── src/
+├── tests/
+├── docs/
+└── README.md
+```
+
+## Hướng dẫn cài đặt
+1. Clone repository
+2. [Các bước cài đặt]
+
+## Hướng dẫn chạy test
+[Thêm hướng dẫn để chạy các test case]
+
 <h2>Xây dựng Website bán quần áo sử dụng công nghệ ReactJS & NodeJS ( API,Socket )</h2>
 <h3>Mô tả chung , giới thiệu đề tài </h3>
 <b>Ngày nay , công nghệ thông tin đã có những bước phát triển mạnh mẽ trong mọi phương diện nói chung ví dụ như : đời sống , công việc , giải trí , truyền thông , ... Và riêng với bán hàng , so với cách bán truyền thống thì nay doanh nghiệp , cửa hàng nhỏ lẻ nào cũng có một website để quáng bá , bán hàng trực tuyến sản phẩm và tương tác với người dùng . Nắm bắt được nhu cầu đó , nhóm em quyết định thực hiện đề tài : Xây dựng Website bán quần áo sử dụng công nghệ ReactJS & NodeJS ( API,Socket ) . Khi sử dụng trang web khách hàng sẽ cảm nhận được sự mới mẻ và thuận tiện của Website mang lại . Và website cũng dễ dàng cung cấp thông tin chi tiết sản phẩm giúp khách hàng có thể thanh toán trực tiếp qua paypal hoặc ship cod .</b>
@@ -141,7 +177,11 @@
     + 1 Note sẽ thuộc 1 order
 
 ## API
-ROOT API ENDPOINT : http://tienkim9920.herokuapp.com
+## Root API Endpoint
+
+`http://tienkim9920.herokuapp.com`
+
+> ⚠️ **Lưu ý:** API này đã **ngừng hoạt động**. Endpoint chỉ dùng để **minh họa cách API hoạt động**.
 
 ```bash
 
@@ -200,18 +240,88 @@ ROOT API ENDPOINT : http://tienkim9920.herokuapp.com
 
 
 ```
-
-
 ## Get Started
 
-``` bash
-# install dependencies
-npm install
+# 🚀 Hướng dẫn cài đặt & kết nối MongoDB Atlas
+
+## 1️⃣ Tạo Cluster trên MongoDB Atlas  
+- Vào [MongoDB Atlas](https://www.mongodb.com/atlas/database) → Đăng nhập hoặc đăng ký.  
+- Nhấn **Build a Database** → chọn gói Free (Shared Cluster).  
+- Chọn phiên bản **MongoDB 5.5**.  
+- Chọn Region gần bạn để có tốc độ tốt.  
+- Nhấn **Create Cluster**.  
+
+## 2️⃣ Tạo Database và User  
+- Vào **Database** → **Collections** → **Create Database**.  
+  - Database name: `mydb` (thay tên nếu muốn).  
+  - Collection name: ví dụ `users`.  
+- Vào **Database Access** → **Add New Database User**.  
+  - Username: `toantra349`.  
+  - Password: `toantoan123` (nên đặt password mạnh hơn).  
+  - Chọn quyền **Read and Write to any database**.  
+
+## 3️⃣ Lấy Connection URI  
+- Vào **Database** → **Connect** → **Connect your application**.  
+- Chọn **Node.js** và copy connection string.  
+- Sau đó thay các biến theo ví dụ bên dưới.
+
+## 4️⃣ Cấu hình kết nối trong `index.js` (server)  
+
+```javascript
+const USER = "toantra349"; // Thay bằng username bạn tạo
+const PASS = encodeURIComponent("toantoan123"); // Thay bằng password bạn tạo
+const DB = "mydb"; // Tên database
+const HOST = "ktpm.dwb8wtz.mongodb.net"; // Host của cluster
+
+const uri = `mongodb+srv://${USER}:${PASS}@${HOST}/${DB}?retryWrites=true&w=majority`;
+
+const mongoose = require('mongoose');
+
+mongoose.connect(uri)
+  .then(() => console.log("✅ Kết nối MongoDB Atlas thành công"))
+  .catch(err => console.error("❌ Lỗi kết nối MongoDB Atlas:", err));
 ```
-``` bash
-# run project
-npm start
+
+## 🛠️ Chạy dự án trong thư mục `admin_app` với Docker
+
+```bash
+cd admin_app
 ```
+```bash
+docker run --rm -it ^
+  -p 3001:3001 ^
+  -v "%cd%":/app ^
+  -w /app ^
+  -e HOST=0.0.0.0 ^
+  -e PORT=3001 ^
+  -e CHOKIDAR_USEPOLLING=true ^
+  -e WATCHPACK_POLLING=true ^
+  -e BROWSER=none ^
+  node:16-alpine sh -lc "npm install --no-audit --no-fund --legacy-peer-deps && npm start"
+
+
+```
+## 🛠️ Chạy dự án trong thư mục `client_app` với Docker
+
+
+```bash
+
+cd client_app
+```
+```bash
+docker run --rm -it ^
+  -p 3000:3000 ^
+  -e REACT_APP_API_URL=http://host.docker.internal:8000 ^
+  -e CHOKIDAR_USEPOLLING=true ^
+  -e WATCHPACK_POLLING=true ^
+  -e HOST=0.0.0.0 ^
+  -w /app ^
+  -v "%cd%:/app" ^
+  -v /app/node_modules ^
+  node:16-alpine sh -lc "npm -v && node -v && ( [ -f package-lock.json ] && npm ci || npm install ) && npm start"
+
+```
+
 
 ## Features
 - Login, Register, Forgot Password, ResetPassword .
@@ -229,4 +339,5 @@ npm start
 - Express.
 - Mongodb, Mongoose.
 - Nodemailer.
+
 

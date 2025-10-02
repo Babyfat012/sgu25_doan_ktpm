@@ -1,11 +1,10 @@
-var mongoose = require('mongoose');
+// Models/permission.js
+const mongoose = require('mongoose');
 
-var schema = new mongoose.Schema(
-    {
-        permission: String
-    }
-);
+const permissionSchema = new mongoose.Schema({
+    permission: { type: String, required: true }
+});
 
-var Permission = mongoose.model('Permission', schema, 'permission');
+const Permission = mongoose.model('Permission', permissionSchema, 'permission');
 
 module.exports = Permission;

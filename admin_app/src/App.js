@@ -12,6 +12,7 @@ import AuthContextProvider from './component/context/Auth'
 
 import Header from './component/Shared/Header'
 import Menu from './component/Shared/Menu';
+import Dashboard from './component/Dashboard/Dashboard';
 
 import Product from './component/Product/Product'
 import CreateProduct from './component/Product/CreateProduct'
@@ -63,6 +64,7 @@ function App() {
 
           <Switch>
             <Route exact path='/' component={Login} />
+            <Route exact path='/dashboard' component={Dashboard} />
 
             <Route exact path='/customer' component={UserCus} />
             <Route path='/customer/create' component={CreateUserCus} />

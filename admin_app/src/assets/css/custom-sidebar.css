@@ -1,0 +1,48 @@
+/* Custom CSS để fix sidebar scroll */
+
+.scroll-sidebar {
+    height: calc(100vh - 80px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    position: relative;
+}
+
+/* Custom scrollbar cho sidebar */
+.scroll-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scroll-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroll-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.scroll-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Đảm bảo left-sidebar có chiều cao phù hợp */
+.left-sidebar {
+    height: 100vh !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1000;
+    padding-top: 80px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 767px) {
+    .left-sidebar {
+        transform: translateX(-100%);
+        transition: all 0.3s ease;
+    }
+    
+    .left-sidebar.show {
+        transform: translateX(0);
+    }
+}

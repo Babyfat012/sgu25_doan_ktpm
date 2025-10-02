@@ -63,23 +63,39 @@ function Checkout(props) {
         })
 
         const total = Number(sum_price)
+        
+        // Lấy giá ship từ localStorage hoặc state, nếu không có thì = 0
+        const shippingPrice = Number(price) || Number(localStorage.getItem('price')) || 0
 
         if (localStorage.getItem('coupon')){
             // GET localStorage
             const coupon = JSON.parse(localStorage.getItem('coupon'))
 
-            set_discount((total * parseInt(coupon.promotion)) / 100)
+            // Chuyển promotion từ string sang number - hỗ trợ nhiều format
+            let promotionPercent = 0
+            const promotionStr = coupon.promotion.toString()
+            
+            // Tìm số trong string (hỗ trợ "50%", "Giảm 20%", "20", v.v.)
+            const numberMatch = promotionStr.match(/\d+(\.\d+)?/)
+            if (numberMatch) {
+                promotionPercent = parseFloat(numberMatch[0])
+            }
 
-            const newTotal = total - ((total * parseInt(coupon.promotion)) / 100) + Number(price)
+            const discountAmount = (total * promotionPercent) / 100
+
+            set_discount(discountAmount)
+
+            const newTotal = total - discountAmount + shippingPrice
 
             localStorage.setItem("total_price", newTotal)
 
             set_total_price(newTotal)
         }else{
             
-            localStorage.setItem("total_price", total + Number(price))
+            const newTotal = total + shippingPrice
+            localStorage.setItem("total_price", newTotal)
 
-            set_total_price(total + Number(price))
+            set_total_price(newTotal)
 
         }
 
@@ -380,7 +396,7 @@ function Checkout(props) {
                                                     value={information.address}
                                                     onChange={onChangeAddress} />
                                                 {error_address && <span style={{ color: 'red' }}>* Address is required</span>}
-                                                <input id="destination" type="text" name="destination" required="" type="hidden" />
+                                                <input id="destination" name="destination" required="" type="hidden" />
                                             </div>
                                         </div>
                                         <div className="col-md-12">
