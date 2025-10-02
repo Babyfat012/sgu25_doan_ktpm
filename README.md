@@ -338,4 +338,4 @@ docker run --rm -it ^
 - Nodejs, Reactjs.
 - Express.
 - Mongodb, Mongoose.
-- Nodemailer.  ( TEST )
+- Nodemailer. 
