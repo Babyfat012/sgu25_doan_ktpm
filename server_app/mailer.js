@@ -1,11 +1,13 @@
 const nodeMailer = require('nodemailer')
 
-const adminEmail = 'tienkim9920@gmail.com' // Email
+const adminEmail = 'truongphukiet1211@gmail.com' // Email
 
-const adminPassword = 'Tktk0909@' // Password
+// QUAN TRỌNG: Thay thế bằng App Password từ Google Account
+// Không sử dụng mật khẩu thông thường!
+const adminPassword = 'rudo nfxh vhku mihh' // App Password (16 ký tự)
 
 // Mình sử dụng host của google - gmail
-const mailHost = 'smtp.gmail.com'
+const mailHost = 'smtp.gmail.com'   
 
 // 587 là một cổng tiêu chuẩn và phổ biến trong giao thức SMTP
 const mailPort = 587

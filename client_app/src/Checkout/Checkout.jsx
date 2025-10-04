@@ -14,7 +14,7 @@ import CouponAPI from '../API/CouponAPI';
 import MoMo from './MoMo.jsx';
 import MapComponent from './MapComponent';
 
-const socket = io('https://hieusuper20hcm.herokuapp.com/', {
+const socket = io('http://localhost:8000', {
     transports: ['websocket'], jsonp: false
 });
 socket.connect();
@@ -243,22 +243,22 @@ function Checkout(props) {
         }
 
         // data email
-        // const data_email = {
-        //     id_order: response_order._id,
-        //     total: total_price,
-        //     fullname: information.fullname,
-        //     phone: information.phone,
-        //     price: price,
-        //     address: information.address,
-        //     email: information.email
-        // }
+        const data_email = {
+            id_order: response_order._id,
+            total: total_price,
+            fullname: information.fullname,
+            phone: information.phone,
+            price: price,
+            address: information.address,
+            email: information.email
+        }
 
         // Gửi socket lên server
         socket.emit('send_order', "Có người vừa đặt hàng")
         // Xử lý API Send Mail
 
-        // const send_mail = await OrderAPI.post_email(data_email)
-        // console.log(send_mail)
+        const send_mail = await OrderAPI.post_email(data_email)
+        console.log(send_mail)
 
         localStorage.removeItem('information')
         localStorage.removeItem('total_price')

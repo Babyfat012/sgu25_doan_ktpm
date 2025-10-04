@@ -335,3 +335,6 @@ docker compose up --watch
 - Express.
 - Mongodb, Mongoose.
 - Nodemailer. 
+> ⚠️ **Lưu ý:**  
+> Do chưa cập nhật **sinh trắc học** vào **môi trường giả lập của MoMo**, nên hiện tại **không thể thực hiện chuyển khoản giả lập qua MoMo Developer**.  
+> Hệ thống giả lập vẫn chưa được cập nhật nên **chưa thể tiến hành test** được.

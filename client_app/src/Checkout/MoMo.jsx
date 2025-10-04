@@ -25,9 +25,9 @@ function MoMo(props) {
 
     useEffect(() => {
         const path = "https://test-payment.momo.vn/gw_payment/transactionProcessor"
-        const partnerCode = "MOMOHMXO20210608"
-        const accessKey = "XPBbArMut5PxmWiY"
-        const serectkey = "uLb683H8g9dWuiyipZbLHgO6zjSDlVm5"
+        const partnerCode = "MOMO"
+        const accessKey = "F8BBA842ECF85"
+        const serectkey = "K951B6PE1waDMi640xX08PD3vg6EkVlz"
         const orderInfo = "Thanh toán MoMo"
         const notifyurl = "http://localhost:8000/api/Payment/momo"
         const returnUrl = "http://localhost:3000/momo"
