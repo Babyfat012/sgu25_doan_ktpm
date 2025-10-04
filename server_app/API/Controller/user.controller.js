@@ -1,7 +1,7 @@
 const Users = require('../../Models/user')
 
 
-module.exports.index = async (req, res) => {
+module.exports.index = async(req, res) => {
 
     const user = await Users.find()
 
@@ -9,7 +9,7 @@ module.exports.index = async (req, res) => {
 
 }
 
-module.exports.user = async (req, res) => {
+module.exports.user = async(req, res) => {
 
     const id = req.params.id
 
@@ -19,7 +19,7 @@ module.exports.user = async (req, res) => {
 
 }
 
-module.exports.detail = async (req, res) => {
+module.exports.detail = async(req, res) => {
 
     const username = req.query.username
 
@@ -41,7 +41,7 @@ module.exports.detail = async (req, res) => {
 
 }
 
-module.exports.post_user = async (req, res) => {
+module.exports.post_user = async(req, res) => {
 
     const user = await Users.findOne({ username: req.body.username })
 
@@ -55,9 +55,9 @@ module.exports.post_user = async (req, res) => {
 
 }
 
-module.exports.update_user = async (req, res) => {
+module.exports.update_user = async(req, res) => {
 
-    const user = await Users.findOne({ _id: req.body._id})
+    const user = await Users.findOne({ _id: req.body._id })
 
     user.fullname = req.body.fullname
     user.username = req.body.username

@@ -1,8 +1,8 @@
 const User = require('../../../Models/user')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-module.exports.index = async (req, res) => {
+module.exports.index = async(req, res) => {
     let page = parseInt(req.query.page) || 1;
     const keyWordSearch = req.query.search;
 
@@ -38,7 +38,7 @@ module.exports.index = async (req, res) => {
     }
 }
 
-module.exports.create = async (req, res) => {
+module.exports.create = async(req, res) => {
     const user = await User.find();
 
     const userFilter = user.filter((c) => {
@@ -65,7 +65,7 @@ module.exports.create = async (req, res) => {
     }
 }
 
-module.exports.delete = async (req, res) => {
+module.exports.delete = async(req, res) => {
     const id = req.query.id;
 
     await User.deleteOne({ _id: id }, (err) => {
@@ -78,13 +78,13 @@ module.exports.delete = async (req, res) => {
 
 }
 
-module.exports.details = async (req, res) => {
+module.exports.details = async(req, res) => {
     const user = await User.findOne({ _id: req.params.id });
 
     res.json(user)
 }
 
-module.exports.update = async (req, res) => {
+module.exports.update = async(req, res) => {
     const user = await User.findOne({ _id: req.query.id });
     if (req.query.email && req.query.email !== user.email) {
         req.query.email = user.email
@@ -104,13 +104,13 @@ module.exports.update = async (req, res) => {
         fullname: req.query.name,
         password: req.query.password,
         id_permission: req.query.permission
-    }, function (err, res) {
+    }, function(err, res) {
         if (err) return res.json({ msg: err });
     });
     res.json({ msg: "Bạn đã update thành công" })
 }
 
-module.exports.login = async (req, res) => {
+module.exports.login = async(req, res) => {
 
     const email = req.body.email
     const password = req.body.password
@@ -121,8 +121,7 @@ module.exports.login = async (req, res) => {
 
     if (user === null) {
         res.json({ msg: "Không Tìm Thấy User" })
-    }
-    else {
+    } else {
         const auth = await bcrypt.compare(password, user.password)
         if (auth) {
             var token = jwt.sign(user._id.toJSON(), 'gfdgfd');

@@ -29,7 +29,7 @@ const Order = require('./API/Router/admin/order.router')
 const Coupon = require('./API/Router/admin/coupon.router')
 const Sale = require('./API/Router/admin/sale.router')
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const Users = require('./Models/user');
 const Permission = require('./Models/permission'); // chỉ require 1 lần
