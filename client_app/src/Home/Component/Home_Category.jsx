@@ -88,7 +88,9 @@ function Home_Category(props) {
                 <Slider {...settings}>
 
                     {
-                        product_category && product_category.map(value => (
+                        product_category && product_category
+                            .filter(value => value.id_product && value.id_product._id)
+                            .map(value => (
                             <div className="col-lg-12 animate__animated animate__zoomIn col_product" style={{ zIndex: '999', height: '30rem' }} key={value._id}>
                                 <div className="single-product-wrap">
                                     <div className="product-image">
