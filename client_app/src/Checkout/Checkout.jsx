@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import NoteAPI from '../API/NoteAPI';
 import Detail_OrderAPI from '../API/Detail_OrderAPI';
 import CouponAPI from '../API/CouponAPI';
-import MoMo from './MoMo.jsx'
+import MoMo from './MoMo.jsx';
+import MapComponent from './MapComponent';
 
 const socket = io('https://hieusuper20hcm.herokuapp.com/', {
     transports: ['websocket'], jsonp: false
@@ -270,7 +271,7 @@ function Checkout(props) {
 
     const [error_address, set_error_address] = useState(false)
 
-    const [from, set_from] = useState('155 Sư Vạn Hạnh, Phường 13, District 10, Ho Chi Minh City, Vietnam')
+    const [from, set_from] = useState('273 An Duong Vuong, Phuong 3, Quan 5, Ho Chi Minh City, Vietnam')
 
     // Khoảng cách
     const [distance, set_distance] = useState('')
@@ -376,11 +377,14 @@ function Checkout(props) {
                                                 <label>To <span className="required">*</span></label>
                                                 <input type="text"
                                                     id="to_places"
-                                                    placeholder="Enter A Location"
+                                                    placeholder="Ví dụ: 268 Lý Thường Kiệt, Q.10, TP.HCM hoặc Đại học Sài Gòn"
                                                     value={information.address}
                                                     onChange={onChangeAddress} />
                                                 {error_address && <span style={{ color: 'red' }}>* Address is required</span>}
-                                                <input id="destination" type="text" name="destination" required="" type="hidden" />
+                                                <small style={{ color: '#666', fontSize: '12px', display: 'block', marginTop: '5px' }}>
+                                                    💡 Nhập địa chỉ đầy đủ: Số nhà, Đường, Phường/Xã, Quận/Huyện, TP.HCM
+                                                </small>
+                                                <input id="destination" type="hidden" name="destination" />
                                             </div>
                                         </div>
                                         <div className="col-md-12">
@@ -416,7 +420,12 @@ function Checkout(props) {
                                         </div>
                                         <div className="col-md-12">
                                             <div className="order-button-payment">
-                                                <input value="CHECKING" type="submit" id="distance_form" />
+                                                <input value="CHECKING" type="submit" id="distance_form" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    if (window.calculateLeafletDistance) {
+                                                        window.calculateLeafletDistance();
+                                                    }
+                                                }} />
                                             </div>
                                         </div>
                                         <div className="col-md-12">
@@ -430,7 +439,10 @@ function Checkout(props) {
                                 </div>
                             </div>
                             <div className="col-lg-6 col-12">
-                                <div id="map" style={{ height: '400px', width: '500px' }}></div>
+                                <MapComponent 
+                                    fromAddress={from}
+                                    toAddress={information.address}
+                                />
                             </div>
                         </div>
                     )
