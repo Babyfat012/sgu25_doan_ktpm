@@ -10,10 +10,6 @@ function Menu() {
 
     const [menu, setMenu] = useState([
         {
-            item: "Dashboard",
-            permission: "Admin"
-        },
-        {
             item: "Customer",
             permission: "Admin"
         },
@@ -85,19 +81,6 @@ function Menu() {
             <div className="scroll-sidebar" data-sidebarbg="skin6">
                 <nav className="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li className="list-divider"></li>
-                        
-                        <li className="sidebar-item">
-                            <NavLink 
-                                to="/dashboard" 
-                                className="sidebar-link"
-                                activeClassName="active"
-                            >
-                                <i data-feather="home" className="feather-icon"></i>
-                                <span className="hide-menu">Dashboard</span>
-                            </NavLink>
-                        </li>
-                        
                         <li className="list-divider"></li>
                         <li className="nav-small-cap"><span className="hide-menu">Management</span></li>
 

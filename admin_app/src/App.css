@@ -43,8 +43,113 @@
   opacity: 1!important;
 }
 
+/* Fix header logo visibility */
+.topbar {
+  position: fixed !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 1030 !important;
+  height: 70px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.navbar-header {
+  position: relative !important;
+  z-index: 1040 !important;
+  min-width: 250px !important;
+  height: 70px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 15px !important;
+  height: 100% !important;
+}
+
+.navbar-brand a {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.navbar-brand a:hover {
+  opacity: 0.8 !important;
+}
+
+.logo-icon {
+  margin-right: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.logo-icon img {
+  height: 35px !important;
+  width: auto !important;
+  max-width: 35px !important;
+}
+
+.logo-text {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.logo-text img {
+  height: 28px !important;
+  width: auto !important;
+  max-width: 120px !important;
+}
+
+/* Adjust page layout for fixed header */
 .page-wrapper {
   display: block;
+  margin-top: 70px !important;
+  padding-top: 15px !important;
+}
+
+/* Adjust left sidebar */
+.left-sidebar {
+  top: 70px !important;
+  height: calc(100vh - 70px) !important;
+  z-index: 1020 !important;
+}
+
+/* Thêm scrollbar cho menu quản lý */
+.sidebar-nav {
+  height: 100% !important;
+  overflow-y: auto !important;
+}
+
+.sidebar-nav #sidebarnav .sidebar-item .first-level {
+  max-height: 600px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Custom scrollbar styling */
+.sidebar-nav::-webkit-scrollbar,
+.first-level::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track,
+.first-level::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb,
+.first-level::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover,
+.first-level::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .sidebar-nav #sidebarnav .sidebar-item .first-level {
