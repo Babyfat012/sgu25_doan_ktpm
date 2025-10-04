@@ -1,0 +1,80 @@
+services:
+  server_app:
+    build: ./server_app
+    container_name: server_app
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URL=mongodb://mongo:27017/Clothes
+    depends_on:
+      - mongo
+    develop:
+      watch:
+        - path: ./server_app
+          action: sync
+          target: /usr/src/app
+        - path: ./server_app/package.json
+          action: rebuild
+
+  client_app:
+    build: ./client_app
+    container_name: client_app
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - HOST=0.0.0.0
+      - REACT_APP_API_URL=http://localhost:8000/
+    volumes:
+      - ./client_app:/usr/src/app
+      - /usr/src/app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server_app
+    develop:
+      watch:
+        - path: ./client_app
+          action: sync
+          target: /usr/src/app
+        - path: ./client_app/package.json
+          action: rebuild
+
+  admin_app:
+    build: ./admin_app
+    container_name: admin_app
+    ports:
+      - "3001:3001"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - HOST=0.0.0.0
+      - PORT=3001
+      - REACT_APP_API_URL=http://localhost:8000/
+    volumes:
+      - ./admin_app:/usr/src/app
+      - /usr/src/app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server_app
+    develop:
+      watch:
+        - path: ./admin_app
+          action: sync
+          target: /usr/src/app
+        - path: ./admin_app/package.json
+          action: rebuild
+
+  mongo:
+    image: mongo:5
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

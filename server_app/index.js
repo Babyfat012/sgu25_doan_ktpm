@@ -30,14 +30,14 @@ const Coupon = require('./API/Router/admin/coupon.router')
 const Sale = require('./API/Router/admin/sale.router')
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://minhhieu:ZPCKa1ZMZfiAOe7w@cluster0.hrvuv.mongodb.net/Clothes?retryWrites=true&w=majority", {
+mongoose.connect("mongodb://localhost:27017/Clothes", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
-  console.log('Connected to database ')
+  console.log('✅ Connected to local MongoDB database')
 })
   .catch((err) => {
-    console.error(`Error connecting to the database. \n${err}`);
+    console.error(`❌ Error connecting to the database. \n${err}`);
   });
 
 
