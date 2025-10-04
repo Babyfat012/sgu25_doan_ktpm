@@ -8,20 +8,63 @@ import { AuthContext } from '../context/Auth'
 function Menu() {
     const { user, jwt } = useContext(AuthContext);
 
-    const [menu] = useState([
-        { item: "Customer" },
-        { item: "Coupon" },
-        { item: "Product" },
-        { item: "Sale" },
-        { item: "Category" },
-        { item: "Order" },
-        { item: "ConfirmOrder" },
-        { item: "Delivery" },
-        { item: "ConfirmDelivery" },
-        { item: "CompletedOrder" },
-        { item: "CancelOrder" },
-        { item: "User" },
-        { item: "Permission" }
+    const [menu, setMenu] = useState([
+        {
+            item: "Dashboard",
+            permission: "Admin"
+        },
+        {
+            item: "Customer",
+            permission: "Admin"
+        },
+        {
+            item: "Coupon",
+            permission: "Admin"
+        },
+        {
+            item: "Product",
+            permission: "Admin"
+        },
+        {
+            item: "Sale",
+            permission: "Admin"
+        },
+        {
+            item: "Category",
+            permission: "Admin"
+        },
+        {
+            item: "Order",
+            permission: "Admin"
+        },
+        {
+            item: "ConfirmOrder",
+            permission: "Admin"
+        },
+        {
+            item: "Delivery",
+            permission: "Admin"
+        },
+        {
+            item: "ConfirmDelivery",
+            permission: "Admin"
+        },
+        {
+            item: "CompletedOrder",
+            permission: "Admin"
+        },
+        {
+            item: "CancelOrder",
+            permission: "Admin"
+        },
+        {
+            item: "User",
+            permission: "Admin"
+        },
+        {
+            item: "Permission",
+            permission: "Admin"
+        }
     ])
 
     let { pathname } = window.location;
