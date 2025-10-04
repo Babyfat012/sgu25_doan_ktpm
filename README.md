@@ -281,46 +281,42 @@ mongoose.connect(uri)
   .then(() => console.log("✅ Kết nối MongoDB Atlas thành công"))
   .catch(err => console.error("❌ Lỗi kết nối MongoDB Atlas:", err));
 ```
+## 🛠️ Chạy dự án trong thư mục gốc với Docker
 
-## 🛠️ Chạy dự án trong thư mục `admin_app` với Docker
-
-```bash
-cd admin_app
-```
-```bash
-docker run --rm -it ^
-  -p 3001:3001 ^
-  -v "%cd%":/app ^
-  -w /app ^
-  -e HOST=0.0.0.0 ^
-  -e PORT=3001 ^
-  -e CHOKIDAR_USEPOLLING=true ^
-  -e WATCHPACK_POLLING=true ^
-  -e BROWSER=none ^
-  node:16-alpine sh -lc "npm install --no-audit --no-fund --legacy-peer-deps && npm start"
-
-
-```
-## 🛠️ Chạy dự án trong thư mục `client_app` với Docker
-
+### 🔧 Bước 1: Build (tạo image Docker)
+Chạy lệnh sau để **xây dựng lại image** của dự án dựa trên file `Dockerfile` và cấu hình trong `docker-compose.yml`:
 
 ```bash
-
-cd client_app
+docker compose build
 ```
+
+> 🧩 Lệnh này sẽ tải các dependencies cần thiết, cài đặt môi trường, và chuẩn bị container cho ứng dụng của bạn.
+
+---
+
+### 🚀 Bước 2: Khởi động dự án
+Sau khi build xong, khởi động toàn bộ các service (backend, frontend, database, v.v.) bằng lệnh:
+
 ```bash
-docker run --rm -it ^
-  -p 3000:3000 ^
-  -e REACT_APP_API_URL=http://host.docker.internal:8000 ^
-  -e CHOKIDAR_USEPOLLING=true ^
-  -e WATCHPACK_POLLING=true ^
-  -e HOST=0.0.0.0 ^
-  -w /app ^
-  -v "%cd%:/app" ^
-  -v /app/node_modules ^
-  node:16-alpine sh -lc "npm -v && node -v && ( [ -f package-lock.json ] && npm ci || npm install ) && npm start"
-
+docker compose up --watch
 ```
+
+> 🔁 Tuỳ chọn `--watch` (chỉ có ở **Docker Compose v2.22+**) cho phép **tự động rebuild** và **restart container** khi bạn thay đổi mã nguồn trong thư mục dự án — rất hữu ích khi phát triển.
+
+---
+
+### 💡 Ghi chú thêm
+- Nếu đây là lần đầu bạn chạy dự án, Docker sẽ tự động **tải các image phụ thuộc** (ví dụ: Node, Python, PostgreSQL, v.v.)
+- Để dừng tất cả container, nhấn **`Ctrl + C`**, hoặc chạy:
+  ```bash
+  docker compose down
+  ```
+- Nếu muốn chạy ngầm (background), thêm cờ `-d`:
+  ```bash
+  docker compose up -d
+  ```
+
+
 
 
 ## Features
