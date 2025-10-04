@@ -340,6 +340,8 @@ function Checkout(props) {
 
     }
 
+    const [momoImageError, setMomoImageError] = useState(false)
+
     const handlerMomo = () => {
 
         setOrderID(Math.random().toString())
@@ -601,17 +603,106 @@ function Checkout(props) {
                                                     </div>
                                                     <div id="collapseMomo" className="collapse">
                                                         <div className="card-body">
-                                                            {
-                                                                show_error ? 'Please Checking Information!' :
-                                                                <div>
-                                                                    <img src="https://developers.momo.vn/images/logo.png" width="50" onClick={handlerMomo}
-                                                                    style={{ cursor: 'pointer' }} />
-                                                                    <MoMo 
-                                                                        orderID={orderID}
-                                                                        total={total_price}
-                                                                        />
-                                                                </div>  
-                                                            }
+                                                           {
+  show_error ? 'Please Checking Information!' :
+  <div
+    style={{
+      display: 'flex',
+      width: '100%',
+      minHeight: '260px',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '20px',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
+      }}
+    >
+      {/* Logo MoMo với fallback, LOGO TO và Ở GIỮA */}
+      {!momoImageError ? (
+        <img
+          src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+          alt="MoMo Logo"
+          width="160"
+          height="160"
+          onClick={handlerMomo}
+          onError={() => setMomoImageError(true)}
+          style={{
+            cursor: 'pointer',
+            border: '3px solid #a50064',
+            borderRadius: '16px',
+            padding: '10px',
+            transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+            boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.08)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        />
+      ) : (
+        /* Fallback button nếu ảnh lỗi — cũng ở giữa và to */
+        <div
+          onClick={handlerMomo}
+          style={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            padding: '16px 24px',
+            border: '3px solid #a50064',
+            borderRadius: '12px',
+            backgroundColor: '#a50064',
+            color: 'white',
+            fontWeight: 'bold',
+            transition: 'transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease',
+            minWidth: '240px',
+            boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#8a0052';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#a50064';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+        >
+          <div
+            style={{
+              width: '54px',
+              height: '54px',
+              backgroundColor: 'white',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '26px',
+              fontWeight: 'bold',
+              color: '#a50064',
+            }}
+          >
+            M
+          </div>
+          <span style={{ fontSize: '16px' }}>Thanh toán với MoMo</span>
+        </div>
+      )}
+
+      {/* Component MoMo */}
+      <MoMo orderID={orderID} total={total_price} />
+    </div>
+  </div>
+}
+
                                                         </div>
                                                     </div>
                                                 </div>
