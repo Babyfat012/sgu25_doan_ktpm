@@ -10,48 +10,52 @@ function Menu() {
 
     const [menu, setMenu] = useState([
         {
+            item: "Dashboard",
+            permission: "Admin"
+        },
+        {
             item: "Customer",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "Coupon",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "Product",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "Sale",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "Category",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "Order",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "ConfirmOrder",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "Delivery",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "ConfirmDelivery",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "CompletedOrder",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "CancelOrder",
-            permission: "Nhân Viên"
+            permission: "Admin"
         },
         {
             item: "User",
@@ -61,15 +65,6 @@ function Menu() {
             item: "Permission",
             permission: "Admin"
         }
-        // "Category", ,
-        // "Permission",
-        // "User",
-        // "Order",
-        // "ConfirmOrder",
-        // "Delivery",
-        // "ConfirmDelivery",   
-        // "CompletedOrder",
-        // "CancelOrder"
     ])
     let { pathname } = window.location;
     return (

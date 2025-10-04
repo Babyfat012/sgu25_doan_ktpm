@@ -92,7 +92,7 @@ function UserCus(props) {
                                                         <td>{value._id}</td>
                                                         <td>{value.fullname}</td>
                                                         <td>{value.email}</td>
-                                                        <td>{value.id_permission.permission}</td>
+                                                        <td>{value.id_permission && value.id_permission.permission ? value.id_permission.permission : 'Customer'}</td>
                                                         <td>
                                                             <div className="d-flex">
                                                                 <Link to={"user/update/" + value._id} className="btn btn-success mr-1">Update</Link>

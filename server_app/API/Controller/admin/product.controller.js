@@ -118,7 +118,7 @@ module.exports.update = async (req, res) => {
                 // number: req.body.number,
                 describe: req.body.description,
                 gender: req.body.gender,
-                image: fileProduct
+                image: "http://localhost:8000" + fileProduct
             }, function (err, res) {
                 if (err) return res.json({ msg: err });
             });
