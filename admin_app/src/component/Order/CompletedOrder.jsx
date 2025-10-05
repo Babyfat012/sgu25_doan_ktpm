@@ -70,6 +70,7 @@ function CompletedOrder(props) {
 
     let day = [] 
     let month = []
+    let year = []
 
     for (let i = 1; i < 32; i++){
         day.push(i)
@@ -77,6 +78,12 @@ function CompletedOrder(props) {
 
     for (let i = 1; i < 13; i++){
         month.push(i)
+    }
+
+    // Tạo danh sách năm từ 2020 đến năm hiện tại + 1
+    const currentYear = new Date().getFullYear()
+    for (let i = 2020; i <= currentYear + 1; i++){
+        year.push(i)
     }
 
 
@@ -263,8 +270,11 @@ function CompletedOrder(props) {
                                         <select className="custom-select" style={{ color: 'gray', width: '85px'}}
                                             value={getYear} onChange={(e) => setGetYear(e.target.value)}>
                                             <option value="null">Năm</option>
-                                            <option value="2020">2020</option>
-                                            <option value="2021">2021</option>
+                                            {
+                                                year && year.map(y => (
+                                                    <option value={y} key={y}>{y}</option>
+                                                ))
+                                            }
                                         </select>
                                         &nbsp;
                                         <input type="submit" className="btn btn-primary" value="Lọc Hóa Đơn" onClick={handlerStatistic} />
