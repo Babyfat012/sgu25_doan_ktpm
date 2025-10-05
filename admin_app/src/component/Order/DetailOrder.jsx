@@ -75,7 +75,7 @@ function DetailOrder(props) {
                                                 <h5>Address: {order.address}</h5>
                                                 <h5>FeeShip: {new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.feeship)+ ' VNĐ'}</h5>
                                                 <h5>Total: {new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.total)+ ' VNĐ'}</h5>
-                                                <h5>Payment: {order.id_payment.pay_name}</h5>
+                                                <h5>Payment: {order.id_payment && order.id_payment.pay_name ? order.id_payment.pay_name : 'N/A'}</h5>
                                                 <h5>Create Time: {order.create_time}</h5>
                                             </div>
 
