@@ -7,10 +7,10 @@ import { stringify } from 'query-string';
 import { addCart } from '../Redux/Action/ActionCart';
 import { changeCount } from '../Redux/Action/ActionCount';
 import { Link } from 'react-router-dom';
-import Cart from '../API/CartAPI';
-import CommentAPI from '../API/CommentAPI';
+// import Cart from '../API/CartAPI'; // GIAI ĐOẠN 1: Không có Cart
+// import CommentAPI from '../API/CommentAPI'; // GIAI ĐOẠN 1: Không có Comment
 import CartsLocal from '../Share/CartsLocal';
-import SaleAPI from '../API/SaleAPI';
+// import SaleAPI from '../API/SaleAPI'; // GIAI ĐOẠN 1: Không có Sale
 
 Detail_Product.propTypes = {
 
@@ -41,11 +41,11 @@ function Detail_Product(props) {
 
             set_product(response)
 
-            const resDetail = await SaleAPI.checkSale(id)
-            
-            if (resDetail.msg === "Thanh Cong"){
-                setSale(resDetail.sale)
-            }
+            // GIAI ĐOẠN 1: Không có Sale
+            // const resDetail = await SaleAPI.checkSale(id)
+            // if (resDetail.msg === "Thanh Cong"){
+            //     setSale(resDetail.sale)
+            // }
 
         }
 

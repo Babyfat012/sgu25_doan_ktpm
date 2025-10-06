@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import SaleAPI from '../../API/SaleAPI';
 
 Home_Category.propTypes = {
   GET_id_modal: PropTypes.func
@@ -33,19 +32,12 @@ function Home_Category(props) {
     ]
   };
 
+  // GIAI ĐOẠN 1: Không có Sale API
   const [product_category, set_product_category] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await SaleAPI.getList();
-        set_product_category(Array.isArray(response) ? response : []);
-      } catch (e) {
-        console.error('SaleAPI.getList error:', e);
-        set_product_category([]);
-      }
-    };
-    fetchData();
+    // GIAI ĐOẠN 1: Tạm thời không load sale products
+    set_product_category([]);
   }, []);
 
   // Lọc bỏ item thiếu id_product để không bị lỗi null

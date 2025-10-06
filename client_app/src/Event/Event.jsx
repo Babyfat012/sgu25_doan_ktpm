@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Event.css'
 import queryString from 'query-string'
-import CouponAPI from '../API/CouponAPI';
+// import CouponAPI from '../API/CouponAPI'; // GIAI ĐOẠN 1: Không có Coupon
 import Pagination from '../Shop/Component/Pagination';
 import { Link } from 'react-router-dom';
 
@@ -18,14 +18,16 @@ function Event(props) {
 
 
     useEffect(() => {
-        const query = '?' + queryString.stringify(pagination)
-
-        const fetchAllData = async () => {
-            const response = await CouponAPI.getCoupons(query)
-            setCoupons(response.coupons)
-            setTotalPage(response.totalPage)
-        }
-        fetchAllData()
+        // GIAI ĐOẠN 1: Không có Coupon
+        // const query = '?' + queryString.stringify(pagination)
+        // const fetchAllData = async () => {
+        //     const response = await CouponAPI.getCoupons(query)
+        //     setCoupons(response.coupons)
+        //     setTotalPage(response.totalPage)
+        // }
+        // fetchAllData()
+        setCoupons([])
+        setTotalPage(0)
     }, [pagination])
 
 

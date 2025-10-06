@@ -12,7 +12,7 @@ import Product from '../API/Product';
 import { changeCount } from '../Redux/Action/ActionCount';
 import { useDispatch, useSelector } from 'react-redux';
 import CartsLocal from '../Share/CartsLocal';
-import SaleAPI from '../API/SaleAPI';
+// import SaleAPI from '../API/SaleAPI'; // GIAI ĐOẠN 1: Không có Sale
 
 Home.propTypes = {
 

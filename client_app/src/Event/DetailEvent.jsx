@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import CouponAPI from '../API/CouponAPI';
+// import CouponAPI from '../API/CouponAPI'; // GIAI ĐOẠN 1: Không có Coupon
 import './Event.css'
 
 function DetailEvent(props) {
@@ -10,17 +10,13 @@ function DetailEvent(props) {
     const [coupon, setCoupon] = useState({})
 
     useEffect(() => {
-
-        const fetchData = async () => {
-
-            const resposne = await CouponAPI.getCoupon(id)
-            
-            setCoupon(resposne)
-
-        }
-
-        fetchData()
-
+        // GIAI ĐOẠN 1: Không có Coupon
+        // const fetchData = async () => {
+        //     const resposne = await CouponAPI.getCoupon(id)
+        //     setCoupon(resposne)
+        // }
+        // fetchData()
+        setCoupon({})
     }, [id])
 
     return (

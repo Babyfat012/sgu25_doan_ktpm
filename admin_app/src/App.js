@@ -12,7 +12,7 @@ import AuthContextProvider from './component/context/Auth'
 
 import Header from './component/Shared/Header'
 import Menu from './component/Shared/Menu';
-import Dashboard from './component/Dashboard/Dashboard';
+// import Dashboard from './component/Dashboard/Dashboard'; // GIAI ĐOẠN 1: Không có Dashboard
 
 import Product from './component/Product/Product'
 import CreateProduct from './component/Product/CreateProduct'
@@ -23,34 +23,36 @@ import CreateCategory from './component/Category/CreateCategory'
 import DetailCategory from './component/Category/DetailCategory'
 import UpdateCategory from './component/Category/UpdateCategory'
 
-import Permission from './component/Permission/Permission'
-import CreatePermission from './component/Permission/CreatePermission'
-import UpdatePermission from './component/Permission/UpdatePermission'
+// GIAI ĐOẠN 1: Loại bỏ các component không cần thiết
+// import Permission from './component/Permission/Permission'
+// import CreatePermission from './component/Permission/CreatePermission'
+// import UpdatePermission from './component/Permission/UpdatePermission'
 
-import User from './component/User/User'
-import CreateUser from './component/User/CreateUser'
-import UpdateUser from './component/User/UpdateUser'
+// import User from './component/User/User'
+// import CreateUser from './component/User/CreateUser'
+// import UpdateUser from './component/User/UpdateUser'
 
-import UserCus from './component/UserCus/UserCus'
-import CreateUserCus from './component/UserCus/CreateUserCus'
-import UpdateUserCus from './component/UserCus/UpdateUserCus'
+// import UserCus from './component/UserCus/UserCus'
+// import CreateUserCus from './component/UserCus/CreateUserCus'
+// import UpdateUserCus from './component/UserCus/UpdateUserCus'
 
-import Order from './component/Order/Order'
-import DetailOrder from './component/Order/DetailOrder'
-import ConfirmOrder from './component/Order/ConfirmOrder'
-import Delivery from './component/Order/Delivery'
-import ConfirmDelivery from './component/Order/ConfirmDelivery'
-import CompletedOrder from './component/Order/CompletedOrder'
-import CancelOrder from './component/Order/CancelOrder'
+// import Order from './component/Order/Order'
+// import DetailOrder from './component/Order/DetailOrder'
+// import ConfirmOrder from './component/Order/ConfirmOrder'
+// import Delivery from './component/Order/Delivery'
+// import ConfirmDelivery from './component/Order/ConfirmDelivery'
+// import CompletedOrder from './component/Order/CompletedOrder'
+// import CancelOrder from './component/Order/CancelOrder'
+
 import Login from './component/Login/Login';
 import NotFound from './component/NotFound/NotFound';
-import Coupon from './component/Conpon/Coupon';
 
-import CreateCoupon from './component/Conpon/CreateCoupon';
-import UpdateCoupon from './component/Conpon/UpdateCoupon';
-import Sale from './component/Sale/Sale';
-import CreateSale from './component/Sale/CreateSale';
-import UpdateSale from './component/Sale/UpdateSale';
+// import Coupon from './component/Conpon/Coupon';
+// import CreateCoupon from './component/Conpon/CreateCoupon';
+// import UpdateCoupon from './component/Conpon/UpdateCoupon';
+// import Sale from './component/Sale/Sale';
+// import CreateSale from './component/Sale/CreateSale';
+// import UpdateSale from './component/Sale/UpdateSale';
 
 function App() {
   return (
@@ -64,13 +66,9 @@ function App() {
 
           <Switch>
             <Route exact path='/' component={Login} />
-            <Route exact path='/dashboard' component={Dashboard} />
+            {/* <Route exact path='/dashboard' component={Dashboard} /> */}
 
-            <Route exact path='/customer' component={UserCus} />
-            <Route path='/customer/create' component={CreateUserCus} />
-            <Route path='/customer/update/:id' component={UpdateUserCus} />
-
-
+            {/* GIAI ĐOẠN 1: Chỉ giữ Product và Category */}
             <Route exact path='/product' component={Product} />
             <Route path='/product/create' component={CreateProduct} />
             <Route path='/product/update/:id' component={UpdateProduct} />
@@ -80,12 +78,10 @@ function App() {
             <Route path='/category/update/:id' component={UpdateCategory} />
             <Route path='/category/:id' component={DetailCategory} />
 
-            {/* 
-          <Route exact path='/producer' component={Category} />
-          <Route path='/producer/create' component={CreateCategory} />
-          <Route path='/producer/update/:id' component={UpdateCategory} />
-          <Route path='/producer/:id' component={DetailCategory} /> */}
-
+            {/* GIAI ĐOẠN 1: Các route bị loại bỏ
+            <Route exact path='/customer' component={UserCus} />
+            <Route path='/customer/create' component={CreateUserCus} />
+            <Route path='/customer/update/:id' component={UpdateUserCus} />
 
             <Route exact path='/permission' component={Permission} />
             <Route path='/permission/create' component={CreatePermission} />
@@ -110,6 +106,7 @@ function App() {
             <Route exact path='/sale' component={Sale} />
             <Route path='/sale/create' component={CreateSale} />
             <Route path='/sale/:id' component={UpdateSale} />
+            */}
 
             <Route component={NotFound} />
           </Switch>;

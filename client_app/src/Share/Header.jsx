@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import Cart from '../API/CartAPI';
+// import Cart from '../API/CartAPI'; // GIAI ĐOẠN 1: Không có Cart
 import User from '../API/User';
 import logo from '../Image/1.jpg'
 import { addUser, deleteCart } from '../Redux/Action/ActionCart';
@@ -21,16 +21,14 @@ function Header(props) {
     
     const [carts_mini, set_carts_mini] = useState([])
 
-    // Hàm này để khởi tạo localStorage dùng để lưu trữ giỏ hàng
-    // Và nó sẽ chạy lần đầu
+    // GIAI ĐOẠN 1: Tạm thời disable cart
     useEffect(() => {
-
-        if (localStorage.getItem('carts') !== null) {
-            set_carts_mini(JSON.parse(localStorage.getItem('carts')));
-        } else {
-            localStorage.setItem('carts', JSON.stringify([]))
-        }
-
+        // if (localStorage.getItem('carts') !== null) {
+        //     set_carts_mini(JSON.parse(localStorage.getItem('carts')));
+        // } else {
+        //     localStorage.setItem('carts', JSON.stringify([]))
+        // }
+        set_carts_mini([])
     }, [])
 
     // Xử lý thanh navigation

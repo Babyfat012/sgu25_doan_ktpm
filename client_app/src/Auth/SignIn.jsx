@@ -5,7 +5,7 @@ import queryString from 'query-string'
 import User from '../API/User';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSession } from '../Redux/Action/ActionSession';
-import Cart from '../API/CartAPI';
+// import Cart from '../API/CartAPI'; // GIAI ĐOẠN 1: Không có Cart
 import { changeCount } from '../Redux/Action/ActionCount';
 
 SignIn.propTypes = {
