@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import crypto from 'crypto'
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCount } from '../Redux/Action/ActionCount';
-import CouponAPI from '../API/CouponAPI';
 import NoteAPI from '../API/NoteAPI';
 import OrderAPI from '../API/OrderAPI';
 import Detail_OrderAPI from '../API/Detail_OrderAPI';
@@ -57,13 +56,7 @@ function OrderMomo(props) {
                     return
                 }
 
-                if (localStorage.getItem("id_coupon")){
-
-                    const responseUpdate = await CouponAPI.updateCoupon(localStorage.getItem("id_coupon"))
-                    console.log(responseUpdate)
-        
-                }
-
+                // GIAI ĐOẠN 4: Cập nhật coupon đã sử dụng
                 // data Note
                 const data_note = {
                     fullname: information.fullname,
@@ -83,7 +76,7 @@ function OrderMomo(props) {
                     id_payment: '60c05c3adae4bef7b3d55fbf',
                     id_note: response_Note._id,
                     feeship: price,
-                    id_coupon: localStorage.getItem('id_coupon') ? localStorage.getItem('id_coupon') : '',
+                    // id_coupon: localStorage.getItem('id_coupon') ? localStorage.getItem('id_coupon') : '', // GIAI ĐOẠN 4
                     create_time: `${new Date().getDate()}/${parseInt(new Date().getMonth()) + 1}/${new Date().getFullYear()}`
                 }
 
@@ -113,8 +106,8 @@ function OrderMomo(props) {
                 localStorage.removeItem('information')
                 localStorage.removeItem('total_price')
                 localStorage.removeItem('price')
-                localStorage.removeItem('id_coupon')
-                localStorage.removeItem('coupon')
+                // localStorage.removeItem('id_coupon') // GIAI ĐOẠN 4
+                // localStorage.removeItem('coupon') // GIAI ĐOẠN 4
 
 
                 // Hàm này dùng để load lại phần header bằng Redux

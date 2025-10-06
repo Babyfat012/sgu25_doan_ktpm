@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import io from "socket.io-client";
+// import io from "socket.io-client"; // GIAI ĐOẠN 4: Socket.io
 
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
@@ -8,12 +8,12 @@ import { changeCount } from '../Redux/Action/ActionCount';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteAPI from '../API/NoteAPI';
 import Detail_OrderAPI from '../API/Detail_OrderAPI';
-import CouponAPI from '../API/CouponAPI';
 
-const socket = io('http://localhost:8000', {
-    transports: ['websocket'], jsonp: false
-});
-socket.connect();
+// GIAI ĐOẠN 4: Socket.io
+// const socket = io('http://localhost:8000', {
+//     transports: ['websocket'], jsonp: false
+// });
+// socket.connect();
 
 Paypal.propTypes = {
     information: PropTypes.object,
@@ -69,13 +69,6 @@ function Paypal(props) {
 
                 Change_Load_Order(true)
 
-                if (localStorage.getItem("id_coupon")){
-
-                    const responseUpdate = await CouponAPI.updateCoupon(localStorage.getItem("id_coupon"))
-                    console.log(responseUpdate)
-        
-                }
-
                 // data Note
                 const data_note = {
                     fullname: information.fullname,
@@ -95,7 +88,6 @@ function Paypal(props) {
                     id_payment: '60635313a1ba573dc01656b5',
                     id_note: response_Note._id,
                     feeship: price,
-                    id_coupon: localStorage.getItem('id_coupon') ? localStorage.getItem('id_coupon') : '',
                     create_time: `${new Date().getDate()}/${parseInt(new Date().getMonth()) + 1}/${new Date().getFullYear()}`
                 }
 
@@ -140,8 +132,6 @@ function Paypal(props) {
                 localStorage.removeItem('information')
                 localStorage.removeItem('total_price')
                 localStorage.removeItem('price')
-                localStorage.removeItem('id_coupon')
-                localStorage.removeItem('coupon')
                 localStorage.setItem('carts', JSON.stringify([]))
 
                 set_redirect(true)

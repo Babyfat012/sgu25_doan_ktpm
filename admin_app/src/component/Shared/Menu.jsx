@@ -9,26 +9,20 @@ function Menu() {
     const { user, jwt } = useContext(AuthContext);
 
     const [menu, setMenu] = useState([
-        // GIAI ĐOẠN 1: Chỉ giữ Product và Category
-        {
-            item: "Product",
-            permission: "Admin"
-        },
-        {
-            item: "Category",
-            permission: "Admin"
-        }
-        /* GIAI ĐOẠN 1: Các menu bị loại bỏ
         {
             item: "Customer",
             permission: "Admin"
         },
         {
-            item: "Coupon",
+            item: "Product",
             permission: "Admin"
         },
         {
             item: "Sale",
+            permission: "Admin"
+        },
+        {
+            item: "Category",
             permission: "Admin"
         },
         {
@@ -63,7 +57,6 @@ function Menu() {
             item: "Permission",
             permission: "Admin"
         }
-        */
     ])
 
     let { pathname } = window.location;

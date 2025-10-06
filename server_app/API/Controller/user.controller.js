@@ -46,10 +46,11 @@ module.exports.post_user = async(req, res) => {
     const user = await Users.findOne({ username: req.body.username })
 
     if (user) {
-        return res.send("User Da Ton Tai")
+        res.send("User Da Ton Tai")
+    } else {
+        await Users.create(req.body)
     }
-    
-    await Users.create(req.body)
+
     res.send("Thanh Cong")
 
 }

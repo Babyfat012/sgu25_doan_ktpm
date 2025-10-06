@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import io from "socket.io-client";
+// import io from "socket.io-client"; // GIAI ĐOẠN 4: Socket.io cho real-time
 
 import './Checkout.css'
 import OrderAPI from '../API/OrderAPI';
@@ -10,14 +10,14 @@ import { changeCount } from '../Redux/Action/ActionCount';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteAPI from '../API/NoteAPI';
 import Detail_OrderAPI from '../API/Detail_OrderAPI';
-import CouponAPI from '../API/CouponAPI';
 import MoMo from './MoMo.jsx';
 import MapComponent from './MapComponent';
 
-const socket = io('http://localhost:8000', {
-    transports: ['websocket'], jsonp: false
-});
-socket.connect();
+// GIAI ĐOẠN 4: Socket.io
+// const socket = io('http://localhost:8000', {
+//     transports: ['websocket'], jsonp: false
+// });
+// socket.connect();
 
 Checkout.propTypes = {
 
@@ -31,8 +31,6 @@ function Checkout(props) {
     const [carts, set_carts] = useState([])
 
     const [total_price, set_total_price] = useState(0)
-
-    const [discount, set_discount] = useState(0)
 
     // state load_map
     const [load_map, set_load_map] = useState(true)
@@ -68,37 +66,13 @@ function Checkout(props) {
         // Lấy giá ship từ localStorage hoặc state, nếu không có thì = 0
         const shippingPrice = Number(price) || Number(localStorage.getItem('price')) || 0
 
-        if (localStorage.getItem('coupon')){
-            // GET localStorage
-            const coupon = JSON.parse(localStorage.getItem('coupon'))
+        // GIAI ĐOẠN 4: Coupon discount
+        const newTotal = total + shippingPrice
+        localStorage.setItem("total_price", newTotal)
 
-            // Chuyển promotion từ string sang number - hỗ trợ nhiều format
-            let promotionPercent = 0
-            const promotionStr = coupon.promotion.toString()
-            
-            // Tìm số trong string (hỗ trợ "50%", "Giảm 20%", "20", v.v.)
-            const numberMatch = promotionStr.match(/\d+(\.\d+)?/)
-            if (numberMatch) {
-                promotionPercent = parseFloat(numberMatch[0])
-            }
+        set_total_price(newTotal)
 
-            const discountAmount = (total * promotionPercent) / 100
-
-            set_discount(discountAmount)
-
-            const newTotal = total - discountAmount + shippingPrice
-
-            localStorage.setItem("total_price", newTotal)
-
-            set_total_price(newTotal)
-        }else{
-            
-            const newTotal = total + shippingPrice
-            localStorage.setItem("total_price", newTotal)
-
-            set_total_price(newTotal)
-
-        }
+        // } // End GIAI ĐOẠN 4
 
     }
 
@@ -189,13 +163,6 @@ function Checkout(props) {
 
         set_load_order(true)
 
-        if (localStorage.getItem("id_coupon")){
-
-            const responseUpdate = await CouponAPI.updateCoupon(localStorage.getItem("id_coupon"))
-            console.log(responseUpdate)
-
-        }
-
         // data Delivery
         const data_delivery = {
             // id_delivery:  Math.random.toString(),
@@ -216,7 +183,6 @@ function Checkout(props) {
             id_payment: '6086709cdc52ab1ae999e882',
             id_note: response_delivery._id,
             feeship: price,
-            id_coupon: localStorage.getItem('id_coupon') ? localStorage.getItem('id_coupon') : '',
             create_time: `${new Date().getDate()}/${parseInt(new Date().getMonth()) + 1}/${new Date().getFullYear()}`
         }
 
@@ -253,18 +219,16 @@ function Checkout(props) {
             email: information.email
         }
 
-        // Gửi socket lên server
-        socket.emit('send_order', "Có người vừa đặt hàng")
+        // GIAI ĐOẠN 4: Socket.io real-time notification
+        // socket.emit('send_order', "Có người vừa đặt hàng")
+        
         // Xử lý API Send Mail
-
         const send_mail = await OrderAPI.post_email(data_email)
         console.log(send_mail)
 
         localStorage.removeItem('information')
         localStorage.removeItem('total_price')
         localStorage.removeItem('price')
-        localStorage.removeItem('id_coupon')
-        localStorage.removeItem('coupon')
         localStorage.setItem('carts', JSON.stringify([]))
 
         set_redirect(true)
@@ -552,10 +516,12 @@ function Checkout(props) {
                                                     <th>Shipping Cost</th>
                                                     <td><span className="amount">{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(price) + ' VNĐ'}</span></td>
                                                 </tr>
+                                                {/* GIAI ĐOẠN 4: Discount display
                                                 <tr className="cart-subtotal">
                                                     <th>Discount</th>
                                                     <td><span className="amount">{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(discount) + ' VNĐ'}</span></td>
                                                 </tr>
+                                                */}
                                                 <tr className="order-total">
                                                     <th>Order Total</th>
                                                     <td><strong><span className="amount">{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(total_price) + ' VNĐ'}</span></strong></td>

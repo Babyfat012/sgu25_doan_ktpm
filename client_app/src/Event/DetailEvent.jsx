@@ -1,23 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-// import CouponAPI from '../API/CouponAPI'; // GIAI ĐOẠN 1: Không có Coupon
+import React from 'react';
 import './Event.css'
 
 function DetailEvent(props) {
-
-    const { id } = useParams()
-
-    const [coupon, setCoupon] = useState({})
-
-    useEffect(() => {
-        // GIAI ĐOẠN 1: Không có Coupon
-        // const fetchData = async () => {
-        //     const resposne = await CouponAPI.getCoupon(id)
-        //     setCoupon(resposne)
-        // }
-        // fetchData()
-        setCoupon({})
-    }, [id])
 
     return (
         <div>
@@ -32,19 +16,16 @@ function DetailEvent(props) {
                 </div>
             </div>
             <div className="container" style={{ marginTop: '3rem' }}>
-                <h1 className="h4_event">{coupon.describe} CÙNG FEAR OF GOD!!!</h1>
+                <h1 className="h4_event">SỰ KIỆN ĐẶC BIỆT CÙNG FEAR OF GOD!!!</h1>
                 <div style={{ marginTop: '2rem' }}>
                     <a className="a_event">Khuyến mãi</a>
                 </div>
                 <div style={{ marginTop: '2rem'}}>
-                    <span style={{ fontSize: '1.2rem', color: '#646464', fontWeight: 'bold' }}>Cơ hội nhận ngay phiếu giảm giá đơn hàng của FEAR OF GOD!!!</span>
+                    <span style={{ fontSize: '1.2rem', color: '#646464', fontWeight: 'bold' }}>Trải nghiệm mua sắm tuyệt vời tại FEAR OF GOD!!!</span>
                     <br />
-                    <span style={{ fontSize: '1.05rem' }}>Chỉ cần bạn ghé ngay FEAR OF GOD và mua đơn hàng sẽ được giảm giá theo mã code dưới đây:</span>
-                    <li style={{ fontSize: '1.05rem' }}>Mã Code: <i style={{ color: 'red' }}>{coupon.code}</i></li>
-                    <li style={{ fontSize: '1.05rem' }}>Còn lại: <i style={{ color: 'red' }}>{coupon.count}</i></li>
-                    <span style={{ fontSize: '1.05rem' }}>Bạn sẽ nhập mã code vào ô APPLY COUPON trong giỏ hàng của mình.</span>
+                    <span style={{ fontSize: '1.05rem' }}>Hãy ghé thăm FEAR OF GOD để khám phá bộ sưu tập thời trang đa dạng và chất lượng cao!</span>
                     <br />
-                    <span style={{ fontSize: '1.05rem'}}>Lưu ý: <i style={{ color: 'red' }}>Mỗi mã code chỉ sử dụng được 1 lần.</i></span>
+                    <span style={{ fontSize: '1.05rem'}}>Đừng bỏ lỡ cơ hội sở hữu những sản phẩm thời trang độc đáo.</span>
                 </div>
                 <div style={{ padding: '3rem 0' }}>
                     <img style={{ width: '100%' }} src="https://cdn.tgdd.vn/hoi-dap/1321785/banner-la-gi-khac-gi-voi-poster-cach-de-thiet-ke-mot%20(2).jpg" alt="" />

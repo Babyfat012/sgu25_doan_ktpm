@@ -7,7 +7,6 @@ import { changeCount } from '../Redux/Action/ActionCount';
 import CartAPI from '../API/CartAPI'
 import queryString from 'query-string'
 import CartsLocal from '../Share/CartsLocal';
-// import CouponAPI from '../API/CouponAPI'; // GIAI ĐOẠN 2: Chưa có Coupon
 
 Cart.propTypes = {
 
@@ -43,7 +42,6 @@ function Cart(props) {
         })
 
         set_total_price(sum_price)
-        set_new_price(sum_price)
     }
 
     // Hàm này dùng để tăng số lượng
@@ -124,145 +122,8 @@ function Cart(props) {
 
     }
 
-
-    // Hàm này dùng để kiểm tra coupon
-    const [coupon, set_coupon] = useState('')
-
-    const [discount, setDiscount] = useState(0)
-
-    const [new_price, set_new_price] = useState(0)
-
-    const [show_success, set_show_success] = useState(false)
-
-    const [errorCode, setErrorCode] = useState(false)
-
-    const [notEligible, setNotEligible] = useState(false) // Thêm state cho không đủ điều kiện
-
-    const [couponRequirement, setCouponRequirement] = useState('') // Thêm state để lưu yêu cầu coupon
-
-    const handlerCoupon = async (e) => {
-
-        e.preventDefault()
-        
-        // GIAI ĐOẠN 2: Chưa có Coupon API
-        set_show_error(true)
-        setTimeout(() => {
-            set_show_error(false)
-        }, 1500)
-        
-        /* GIAI ĐOẠN 3: Sẽ có Coupon
-        if (!sessionStorage.getItem('id_user')){
-            set_show_error(true)
-        }else{
-
-            const params = {
-                id_user: sessionStorage.getItem('id_user'),
-                code: coupon,
-                total_amount: total_price // Thêm tổng tiền vào params
-            }
-
-            const query = '?' + queryString.stringify(params)
-
-            console.log('=== CLIENT COUPON DEBUG ===')
-            console.log('Gửi request với params:', params)
-            console.log('Query string:', query)
-
-            const response = await CouponAPI.checkCoupon(query)
-
-            console.log('Response nhận được:', response)
-            console.log('Response.coupon:', response.coupon)
-            if (response.coupon) {
-                console.log('Promotion value:', response.coupon.promotion)
-                console.log('Promotion type:', typeof response.coupon.promotion)
-            }
-
-            if (response.msg === 'Không tìm thấy'){
-                setErrorCode(true)
-            }else if (response.msg === 'Bạn đã sử dụng mã này rồi'){
-                setErrorCode(true)
-            }else if (response.msg === 'Không đủ điều kiện'){
-                // Xử lý trường hợp không đủ điều kiện
-                setNotEligible(true)
-                setCouponRequirement(response.errorMessage || response.describe || 'Không đủ điều kiện áp dụng coupon này')
-            }else{
-                localStorage.setItem('id_coupon', response.coupon._id)
-                localStorage.setItem('coupon', JSON.stringify(response.coupon))
-
-                // Chuyển promotion từ string sang number - hỗ trợ nhiều format
-                let promotionPercent = 0
-                const promotionStr = response.coupon.promotion.toString()
-                
-                // Tìm số trong string (hỗ trợ "50%", "Giảm 20%", "20", v.v.)
-                const numberMatch = promotionStr.match(/\d+(\.\d+)?/)
-                if (numberMatch) {
-                    promotionPercent = parseFloat(numberMatch[0])
-                }
-
-                const discountAmount = (total_price * promotionPercent) / 100
-
-                console.log('Total price:', total_price)
-                console.log('Promotion string:', promotionStr)
-                console.log('Promotion percent extracted:', promotionPercent)
-                console.log('Discount amount:', discountAmount)
-
-                setDiscount(discountAmount)
-
-                const newTotal = total_price - discountAmount
-
-                console.log('New total:', newTotal)
-
-                set_new_price(newTotal)
-                set_show_success(true)
-            }
-
-        }
-
-        setTimeout(() => {
-            set_show_error(false)
-            set_show_null_cart(false)
-            set_show_success(false)
-            setErrorCode(false)
-            setNotEligible(false) // Reset state không đủ điều kiện
-        }, 1500)
-        */
-    }
-
     return (
         <div>
-            {
-                notEligible &&
-                <div className="modal_success">
-                    <div className="group_model_success pt-3">
-                        <div className="text-center p-2">
-                            <i className="fa fa-exclamation-triangle fix_icon_bell" style={{ fontSize: '40px', color: '#fff', backgroundColor: '#f84545' }}></i>
-                        </div>
-                        <h4 className="text-center p-3" style={{ color: '#fff' }}>Không Đủ Điều Kiện!</h4>
-                        <p className="text-center pb-3" style={{ color: '#fff', fontSize: '14px' }}>{couponRequirement}</p>
-                    </div>
-                </div>
-            }
-            {
-                errorCode &&
-                <div className="modal_success">
-                    <div className="group_model_success pt-3">
-                        <div className="text-center p-2">
-                            <i className="fa fa-bell fix_icon_bell" style={{ fontSize: '40px', color: '#fff', backgroundColor: '#f84545' }}></i>
-                        </div>
-                        <h4 className="text-center p-3" style={{ color: '#fff' }}>Vui Lòng Kiểm Tra Lại Mã Code!</h4>
-                    </div>
-                </div>
-            }
-            {
-                show_success &&
-                <div className="modal_success">
-                    <div className="group_model_success pt-3">
-                        <div className="text-center p-2">
-                            <i className="fa fa-bell fix_icon_bell" style={{ fontSize: '40px', color: '#fff' }}></i>
-                        </div>
-                        <h4 className="text-center p-3" style={{ color: '#fff' }}>Áp Dụng Mã Code Thành Công!</h4>
-                    </div>
-                </div>
-            }
             {
                 show_error &&
                 <div className="modal_success">
@@ -341,24 +202,13 @@ function Cart(props) {
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="coupon-all">
-                                            <div class="coupon">
-                                                <input id="coupon_code" class="input-text" onChange={(e) => set_coupon(e.target.value)} value={coupon} placeholder="Coupon code" type="text" /> &nbsp;
-                                                <input class="button" value="Apply coupon" type="submit" onClick={handlerCoupon} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div className="row">
                                     <div className="col-md-5 ml-auto">
                                         <div className="cart-page-total">
                                             <h2>Cart totals</h2>
                                             <ul>
                                                 <li>Sub Total <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(total_price) + ' VNĐ'}</span></li>
-                                                <li>Discount <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(discount) + ' VNĐ'}</span></li>
-                                                <li>Total <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(new_price) + ' VNĐ'}</span></li>
+                                                <li>Total <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(total_price) + ' VNĐ'}</span></li>
                                             </ul>
                                             <a style={{ color: '#fff', cursor: 'pointer', fontWeight: '600' }} onClick={handler_checkout}>Proceed to checkout</a>
                                         </div>
