@@ -1,15 +1,16 @@
-# 🛒 GIAI ĐOẠN 3 - ĐẶT HÀNG, BÌNH LUẬN, GIAO HÀNG & ADMIN PANEL
+# 🛒 GIAI ĐOẠN 3 - ĐẶT HÀNG & ĐÁNH GIÁ
 
 > **Branch:** `giai-doan-3`  
-> **Mô tả:** Giai đoạn 3 bổ sung chức năng đặt hàng, bình luận sản phẩm, quản lý giao hàng và **ADMIN PANEL đầy đủ**.
+> **Mô tả:** Giai đoạn 3 bổ sung chức năng đặt hàng, đánh giá sản phẩm và quản lý giao hàng với **ADMIN PANEL đầy đủ**.
 
 ---
 
 ## 🎯 Tính năng đã triển khai
 
-### ✅ Từ Giai đoạn 1 & 2 (kế thừa)
+### ✅ Từ Giai đoạn 2 (kế thừa)
 - **Xem sản phẩm:** Hiển thị danh sách sản phẩm với phân trang
-- **Tìm kiếm:** Tìm kiếm sản phẩm theo tên
+- **Tìm ki| **⭐ Admin Panel** | ❌ | ❌ | ✅ |
+| **⭐ Sale/Khuyến mãi** | ❌ | ❌ | ✅ |* Tìm kiếm sản phẩm theo tên
 - **Danh mục:** Lọc sản phẩm theo danh mục
 - **Xem chi tiết:** Xem thông tin chi tiết sản phẩm
 - **Đăng ký/Đăng nhập:** Quản lý tài khoản người dùng
@@ -17,44 +18,50 @@
 
 ### 🆕 Mới trong Giai đoạn 3
 
-#### ✅ Đặt hàng (Order & Checkout):
-- Tạo đơn hàng từ giỏ hàng
-- Nhập thông tin giao hàng (địa chỉ, số điện thoại, email)
-- Chọn phương thức thanh toán (Cash, PayPal, MoMo)
-- Xác nhận đơn hàng
-- Xem lịch sử đơn hàng
-- Tích hợp Google Maps API để tính phí ship theo khoảng cách
+#### ✅ Đặt hàng (Order + Detail_Order):
+- Tạo đơn hàng từ giỏ hàng với thông tin chi tiết sản phẩm
+- Lưu trữ thông tin đơn hàng và chi tiết từng sản phẩm
+- Quản lý trạng thái đơn hàng
+- Tích hợp với hệ thống thanh toán
 
-#### ✅ Thông báo Email (Email Notification): ⭐ MỚI!
+#### ✅ Xem lịch sử đơn hàng:
+- Người dùng có thể xem tất cả đơn hàng đã đặt
+- Hiển thị trạng thái và thông tin chi tiết từng đơn
+- Lọc đơn hàng theo trạng thái
+
+#### ✅ Ghi chú đơn hàng (Note):
+- Thêm ghi chú cho đơn hàng
+- Lưu thông tin liên hệ và yêu cầu đặc biệt
+- Quản lý thông tin giao hàng
+
+#### ✅ Tính phí vận chuyển (Delivery):
+- Tích hợp Leaflet API để tính khoảng cách
+- Tính phí ship theo khoảng cách thực tế
+- Hiển thị thông tin giao hàng chi tiết
+
+#### ✅ Thanh toán COD (Payment):
+- Hỗ trợ thanh toán tiền mặt khi giao hàng
+- Tích hợp PayPal và MoMo
+- Xử lý thanh toán an toàn
+
+#### ✅ Gửi email xác nhận đơn hàng:
 - Gửi email xác nhận sau khi đặt hàng thành công
-- Email chứa thông tin chi tiết:
-  - Danh sách sản phẩm (tên, hình ảnh, giá, số lượng, size)
-  - Thông tin khách hàng (tên, số điện thoại, địa chỉ)
-  - Phí vận chuyển
-  - Tổng thanh toán
+- Email chứa thông tin chi tiết đơn hàng
 - Sử dụng **Nodemailer** với SMTP Gmail
-- Cấu hình trong `server_app/mailer.js`
-- API: `/api/Payment/email`
 
-#### ✅ Bình luận & Đánh giá (Comment):
-- Viết bình luận cho sản phẩm
-- Đánh giá sao (1-5 sao)
-- Xem danh sách bình luận của sản phẩm
+#### ✅ Đánh giá sản phẩm (Comment):
+- Viết bình luận và đánh giá sao (1-5 sao) cho sản phẩm
+- Xem danh sách bình luận của từng sản phẩm
 - Chỉ người dùng đã đăng nhập mới được bình luận
 
-#### ✅ Quản lý giao hàng (Delivery):
-- Lưu thông tin giao hàng
-- Theo dõi trạng thái đơn hàng
-- Xem chi tiết đơn hàng
-
 #### ✅ Admin Panel (Quản trị viên): ⭐ MỚI!
+
 - **Dashboard:** Thống kê tổng quan (sản phẩm, người dùng, đơn hàng, doanh thu)
 - **Quản lý sản phẩm:** CRUD sản phẩm, upload hình ảnh, quản lý tồn kho
 - **Quản lý danh mục:** CRUD danh mục sản phẩm
 - **Quản lý người dùng:** Xem danh sách user, phân quyền, khóa/mở tài khoản
 - **Quản lý đơn hàng:** Xem, cập nhật trạng thái đơn hàng, hủy đơn
 - **Quản lý bình luận:** Duyệt, xóa bình luận không phù hợp
-- **Quản lý coupon:** Tạo, sửa, xóa mã giảm giá
 - **Quản lý khuyến mãi:** Tạo, quản lý chương trình sale
 - **Báo cáo & thống kê:** Doanh thu theo thời gian, sản phẩm bán chạy
 - **Cài đặt hệ thống:** Quản lý quyền, cấu hình website
@@ -77,7 +84,6 @@ server_app/
 │   │   ├── comment.controller.js        # 🆕 Quản lý bình luận
 │   │   ├── delivery.controller.js       # 🆕 Quản lý giao hàng
 │   │   ├── note.controller.js           # 🆕 Quản lý ghi chú
-│   │   ├── coupon.controller.js         # ⭐ Quản lý mã giảm giá (Admin)
 │   │   ├── sale.controller.js           # ⭐ Quản lý khuyến mãi (Admin)
 │   │   └── permission.controller.js     # ⭐ Quản lý quyền (Admin)
 │   └── Router/
@@ -89,7 +95,6 @@ server_app/
 │       ├── comment.router.js            # 🆕
 │       ├── delivery.router.js           # 🆕
 │       ├── note.router.js               # 🆕
-│       ├── coupon.router.js             # ⭐ Route: /api/coupon (Admin)
 │       ├── sale.router.js               # ⭐ Route: /api/sale (Admin)
 │       └── permission.router.js         # ⭐ Route: /api/permission (Admin)
 ├── Models/
@@ -104,7 +109,6 @@ server_app/
 │   ├── delivery.js                      # 🆕 Schema Delivery
 │   ├── note.js                          # 🆕 Schema Note
 │   ├── payment.js                       # 🆕 Schema Payment
-│   ├── coupon.js                        # ⭐ Schema Coupon (Admin)
 │   ├── sale.js                          # ⭐ Schema Sale (Admin)
 │   └── favorite.js                      # ⭐ Schema Favorite (Admin)
 ├── mailer.js                            # ⭐ Email service (Nodemailer)
@@ -221,13 +225,6 @@ client_app/src/
 - `GET /api/note/:id` - Lấy ghi chú theo ID
 
 ### ⭐ Admin APIs (MỚI):
-
-#### Coupon API:
-- `GET /api/coupon/checkCoupon` - Kiểm tra mã giảm giá
-- `GET /api/admin/Coupon` - Lấy danh sách coupon (Admin)
-- `POST /api/admin/Coupon` - Tạo coupon mới (Admin)
-- `PUT /api/admin/Coupon/:id` - Cập nhật coupon (Admin)
-- `DELETE /api/admin/Coupon/:id` - Xóa coupon (Admin)
 
 #### Sale API:
 - `GET /api/admin/Sale` - Lấy danh sách khuyến mãi (Admin)
@@ -347,7 +344,7 @@ client_app/src/
 | **⭐ Email thông báo** | ❌ | ❌ | ✅ |
 | **⭐ Admin Panel** | ❌ | ❌ | ✅ |
 | **⭐ Mã giảm giá (Coupon)** | ❌ | ❌ | ✅ |
-| **⭐ Sale/Khuyến mãi** | ❌ | ❌ | ✅ |
+| **⭐ Sale/Khuyến mãi** | ❌ | ❌ |❌  |
 | Live Chat | ❌ | ❌ | ❌ |
 | PayPal Integration | ❌ | ❌ | ⚠️ |
 
@@ -359,8 +356,7 @@ client_app/src/
 - ✅ Thanh toán tiền mặt (COD)
 - ✅ Email notification khi đặt hàng (Nodemailer + Gmail SMTP)
 - ✅ Tính phí ship theo khoảng cách (Google Maps API)
-- ✅ **Admin Panel hoàn chỉnh** (Quản lý sản phẩm, đơn hàng, user, coupon, sale)
-- ✅ **Coupon system** (Tạo, kiểm tra, áp dụng mã giảm giá)
+- ✅ **Admin Panel hoàn chỉnh** (Quản lý sản phẩm, đơn hàng, user, sale)
 - ✅ **Sale management** (Quản lý khuyến mãi, giảm giá sản phẩm)
 - ✅ **Dashboard thống kê** (Doanh thu, đơn hàng, sản phẩm bán chạy)
 - ✅ Bình luận và đánh giá sản phẩm
@@ -376,8 +372,6 @@ client_app/src/
 - ❌ Socket.io notifications
 - ❌ Advanced analytics & reporting
 - ❌ Multi-language support
-- ❌ Mã giảm giá (Coupon)
-- ❌ Sale/Khuyến mãi
 - ❌ Live Chat
 - ❌ Socket.io real-time notification
 
@@ -446,8 +440,8 @@ client_app/src/
 ## 📅 Kế hoạch Giai đoạn 4
 
 ### Tính năng sẽ thêm:
+
 - ✅ **Admin Panel:** Quản lý đơn hàng, user, bình luận
-- ✅ **Mã giảm giá (Coupon):** Áp dụng mã giảm giá khi thanh toán
 - ✅ **Khuyến mãi (Sale):** Hiển thị sản phẩm giảm giá
 - ✅ **Live Chat:** Socket.io chat real-time
 - ✅ **PayPal Integration:** Thanh toán qua PayPal
