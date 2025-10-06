@@ -212,7 +212,6 @@ admin_app/src/component/
 - ❌ Mã giảm giá (Coupon) - đã vô hiệu hóa
 - ❌ Thanh toán (Checkout)
 - ❌ Lịch sử đơn hàng
-- ❌ Yêu thích (Favorite)
 
 ### Lưu ý kỹ thuật:
 - Giỏ hàng được lưu ở **LocalStorage** (client-side)

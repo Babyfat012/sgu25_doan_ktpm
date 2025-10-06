@@ -50,7 +50,38 @@ const Favorite = lazy(() => {
   });
 });
 
-// GIAI ĐOẠN 2: Vẫn chưa có Event, History, Checkout
+// GIAI ĐOẠN 3: Thêm Checkout, History, Order
+const Checkout = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./Checkout/Checkout")), 2000);
+  });
+});
+
+const History = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./History/History")), 2000);
+  });
+});
+
+const OrderSuccess = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./Order/OrderSuccess")), 2000);
+  });
+});
+
+const OrderFail = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./Order/OrderFail")), 2000);
+  });
+});
+
+const OrderMomo = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./Order/OrderMomo")), 2000);
+  });
+});
+
+// GIAI ĐOẠN 3: Vẫn chưa có Event
 // const Event = lazy(() => {
 //   return new Promise((resolve) => {
 //     setTimeout(() => resolve(import("./Event/Event")), 2000);
@@ -87,7 +118,7 @@ const SignUp = lazy(() => {
   });
 });
 
-// GIAI ĐOẠN 1: Loại bỏ History và Profile
+// GIAI ĐOẠN 3: Loại bỏ comment cũ, History đã được thêm ở trên
 // const History = lazy(() => {
 //   return new Promise((resolve) => {
 //     setTimeout(() => resolve(import("./History/History")), 2000);
@@ -135,8 +166,15 @@ function App() {
             <Route path="/cart" component={Cart} />
             <Route path="/favorite" component={Favorite} />
             
-            {/* GIAI ĐOẠN 2: Vẫn chưa có Checkout, Event, Order, History */}
-            {/* <Route path="/checkout" component={Checkout} /> */}
+            {/* GIAI ĐOẠN 3: Thêm Checkout, History, Order */}
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/history" component={History} />
+            <Route path="/ordersuccess" component={OrderSuccess} />
+            <Route path="/orderfail" component={OrderFail} />
+            <Route path="/ordermomo" component={OrderMomo} />
+            
+            {/* GIAI ĐOẠN 3: Vẫn chưa có Event */}
+            {/* <Route path="/event" component={Event} /> */}
             {/* <Route exact path="/event" component={Event} /> */}
             {/* <Route path="/event/:id" component={DetailEvent} /> */}
             {/* <Route path="/success" component={OrderSuccess} /> */}
