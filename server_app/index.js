@@ -140,5 +140,5 @@ app.use('/api/Category', CategoryAPI)
 
 
 http.listen(port, () => {
-    console.log('🚀 Server đang chạy trên port: ' + port + ' - GIAI ĐOẠN 1');
+    console.log('🚀 Server đang chạy trên port: ' + port + ' - GIAI ĐOẠN 2');
 });

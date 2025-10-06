@@ -7,10 +7,10 @@ import { stringify } from 'query-string';
 import { addCart } from '../Redux/Action/ActionCart';
 import { changeCount } from '../Redux/Action/ActionCount';
 import { Link } from 'react-router-dom';
-// import Cart from '../API/CartAPI'; // GIAI ĐOẠN 1: Không có Cart
-// import CommentAPI from '../API/CommentAPI'; // GIAI ĐOẠN 1: Không có Comment
+import Cart from '../API/CartAPI'; // GIAI ĐOẠN 2: Thêm lại Cart
+// import CommentAPI from '../API/CommentAPI'; // GIAI ĐOẠN 2: Vẫn chưa có Comment
 import CartsLocal from '../Share/CartsLocal';
-// import SaleAPI from '../API/SaleAPI'; // GIAI ĐOẠN 1: Không có Sale
+// import SaleAPI from '../API/SaleAPI'; // GIAI ĐOẠN 2: Vẫn chưa có Sale
 
 Detail_Product.propTypes = {
 

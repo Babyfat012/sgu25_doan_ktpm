@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-// import Cart from '../API/CartAPI'; // GIAI ĐOẠN 1: Không có Cart
+import Cart from '../API/CartAPI'; // GIAI ĐOẠN 2: Thêm lại Cart
 import User from '../API/User';
 import logo from '../Image/1.jpg'
 import { addUser, deleteCart } from '../Redux/Action/ActionCart';
@@ -21,14 +21,13 @@ function Header(props) {
     
     const [carts_mini, set_carts_mini] = useState([])
 
-    // GIAI ĐOẠN 1: Tạm thời disable cart
+    // GIAI ĐOẠN 2: Khôi phục cart localStorage
     useEffect(() => {
-        // if (localStorage.getItem('carts') !== null) {
-        //     set_carts_mini(JSON.parse(localStorage.getItem('carts')));
-        // } else {
-        //     localStorage.setItem('carts', JSON.stringify([]))
-        // }
-        set_carts_mini([])
+        if (localStorage.getItem('carts') !== null) {
+            set_carts_mini(JSON.parse(localStorage.getItem('carts')));
+        } else {
+            localStorage.setItem('carts', JSON.stringify([]))
+        }
     }, [])
 
     // Xử lý thanh navigation

@@ -37,19 +37,20 @@ const Detail_Product = lazy(() => {
   });
 });
 
-// GIAI ĐOẠN 1: Loại bỏ Cart, Checkout, Favorite, Event, History
-// const Cart = lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("./Cart/Cart")), 2000);
-//   });
-// });
+// GIAI ĐOẠN 2: Thêm lại Cart và Favorite
+const Cart = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./Cart/Cart")), 2000);
+  });
+});
 
-// const Favorite = lazy(() => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("./Favorite/Favorite")), 2000);
-//   });
-// });
+const Favorite = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./Favorite/Favorite")), 2000);
+  });
+});
 
+// GIAI ĐOẠN 2: Vẫn chưa có Event, History, Checkout
 // const Event = lazy(() => {
 //   return new Promise((resolve) => {
 //     setTimeout(() => resolve(import("./Event/Event")), 2000);
@@ -130,10 +131,12 @@ function App() {
             <Route path="/shop/:id" component={Shop} />
             <Route path="/detail/:id" component={Detail_Product} />
             
-            {/* GIAI ĐOẠN 1: Loại bỏ các route không cần thiết */}
-            {/* <Route path="/cart" component={Cart} /> */}
+            {/* GIAI ĐOẠN 2: Thêm lại Cart và Favorite */}
+            <Route path="/cart" component={Cart} />
+            <Route path="/favorite" component={Favorite} />
+            
+            {/* GIAI ĐOẠN 2: Vẫn chưa có Checkout, Event, Order, History */}
             {/* <Route path="/checkout" component={Checkout} /> */}
-            {/* <Route path="/favorite" component={Favorite} /> */}
             {/* <Route exact path="/event" component={Event} /> */}
             {/* <Route path="/event/:id" component={DetailEvent} /> */}
             {/* <Route path="/success" component={OrderSuccess} /> */}
