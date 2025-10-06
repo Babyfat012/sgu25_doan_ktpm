@@ -14,6 +14,7 @@ const OrderAPI = require('./API/Router/order.router') // GIAI ĐOẠN 3: Thêm O
 const DetailOrderAPI = require('./API/Router/detail_order.router') // GIAI ĐOẠN 3: Thêm Detail Order
 const CommentAPI = require('./API/Router/comment.router') // GIAI ĐOẠN 3: Thêm Comment
 const DeliveryAPI = require('./API/Router/delivery.router') // GIAI ĐOẠN 3: Thêm Delivery
+const NoteAPI = require('./API/Router/note.router') // GIAI ĐOẠN 3: Thêm Note
 
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
@@ -145,6 +146,7 @@ app.use('/api/Order', OrderAPI) // GIAI ĐOẠN 3: Thêm Order
 app.use('/api/Detail_Order', DetailOrderAPI) // GIAI ĐOẠN 3: Thêm Detail Order
 app.use('/api/Comment', CommentAPI) // GIAI ĐOẠN 3: Thêm Comment
 app.use('/api/Delivery', DeliveryAPI) // GIAI ĐOẠN 3: Thêm Delivery
+app.use('/api/Note', NoteAPI) // GIAI ĐOẠN 3: Thêm Note
 
 
 http.listen(port, () => {
