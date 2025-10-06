@@ -14,8 +14,8 @@ function Search(props) {
 
     const [products, set_products] = useState([])
     const [page, set_page] = useState(1)
-
     const [show_load, set_show_load] = useState(true)
+    const [sortType, setSortType] = useState('default') // Thêm state cho sort
 
     useEffect(() => {
 
@@ -47,6 +47,26 @@ function Search(props) {
 
     }, [page])
 
+    // Hàm xử lý sort
+    const handleSort = (e) => {
+        const value = e.target.value
+        setSortType(value)
+        
+        let sortedProducts = [...products]
+        
+        if (value === 'price-asc') {
+            sortedProducts.sort((a, b) => parseFloat(a.price_product) - parseFloat(b.price_product))
+        } else if (value === 'price-desc') {
+            sortedProducts.sort((a, b) => parseFloat(b.price_product) - parseFloat(a.price_product))
+        } else if (value === 'name-asc') {
+            sortedProducts.sort((a, b) => a.name_product.localeCompare(b.name_product))
+        } else if (value === 'name-desc') {
+            sortedProducts.sort((a, b) => b.name_product.localeCompare(a.name_product))
+        }
+        
+        set_products(sortedProducts)
+    }
+
 
     return (
 
@@ -58,10 +78,12 @@ function Search(props) {
                             <div className="product-select-box">
                                 <div className="product-short">
                                     <p>Sort By:</p>
-                                    <select className="nice-select">
-                                        <option value="trending">Relevance</option>
-                                        <option value="rating">Price (Low &gt; High)</option>
-                                        <option value="rating">Price (High &gt; Low)</option>
+                                    <select className="nice-select" value={sortType} onChange={handleSort}>
+                                        <option value="default">Relevance</option>
+                                        <option value="price-asc">Price (Low &gt; High)</option>
+                                        <option value="price-desc">Price (High &gt; Low)</option>
+                                        <option value="name-asc">Name (A - Z)</option>
+                                        <option value="name-desc">Name (Z - A)</option>
                                     </select>
                                 </div>
                             </div>
