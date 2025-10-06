@@ -345,7 +345,6 @@ client_app/src/
 | **⭐ Admin Panel** | ❌ | ❌ | ✅ |
 | **⭐ Mã giảm giá (Coupon)** | ❌ | ❌ | ✅ |
 | **⭐ Sale/Khuyến mãi** | ❌ | ❌ |❌  |
-| Live Chat | ❌ | ❌ | ❌ |
 | PayPal Integration | ❌ | ❌ | ⚠️ |
 
 ---
@@ -372,7 +371,6 @@ client_app/src/
 - ❌ Socket.io notifications
 - ❌ Advanced analytics & reporting
 - ❌ Multi-language support
-- ❌ Live Chat
 - ❌ Socket.io real-time notification
 
 ### Lưu ý kỹ thuật:
