@@ -11,25 +11,13 @@ import "./App.css";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Share/Header";
-// import Home from "./Home/Home";
 import Footer from "./Share/Footer";
-// import Shop from "./Shop/Shop";
-// import Detail_Product from "./DetailProduct/Detail_Product";
-// import Cart from "./Cart/Cart";
-import Checkout from "./Checkout/Checkout";
-// import Favorite from "./Favorite/Favorite";
-// import About from "./About/About";
-// import Contact from "./Contact/Contact";
-// import SignIn from "./Auth/SignIn";
-// import SignUp from "./Auth/SignUp";
-import OrderSuccess from "./Order/OrderSuccess";
-import OrderFail from "./Order/OrderFail";
-// import History from "./History/History";
-// import Profile from "./Profile/Profile";
-// import Search from "./Search/Search";
+// GIAI ĐOẠN 1: Loại bỏ các component không cần thiết
+// import Checkout from "./Checkout/Checkout";
+// import OrderSuccess from "./Order/OrderSuccess";
+// import OrderFail from "./Order/OrderFail";
+// import OrderMomo from "./Order/OrderMomo";
 import { lazy, Suspense } from "react";
-import OrderMomo from "./Order/OrderMomo";
-// import DetailEvent from "./About/DetailEvent";
 
 const Home = lazy(() => {
   return new Promise((resolve) => {
@@ -49,35 +37,36 @@ const Detail_Product = lazy(() => {
   });
 });
 
-const Cart = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("./Cart/Cart")), 2000);
-  });
-});
-
-// const Checkout = lazy(() => {
+// GIAI ĐOẠN 1: Loại bỏ Cart, Checkout, Favorite, Event, History
+// const Cart = lazy(() => {
 //   return new Promise((resolve) => {
-//     setTimeout(() => resolve(import("./Checkout/Checkout")), 2000);
+//     setTimeout(() => resolve(import("./Cart/Cart")), 2000);
 //   });
 // });
 
-const Favorite = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("./Favorite/Favorite")), 2000);
-  });
-});
+// const Favorite = lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("./Favorite/Favorite")), 2000);
+//   });
+// });
 
-const Event = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("./Event/Event")), 2000);
-  });
-});
+// const Event = lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("./Event/Event")), 2000);
+//   });
+// });
 
-const DetailEvent = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("./Event/DetailEvent")), 2000);
-  });
-});
+// const DetailEvent = lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("./Event/DetailEvent")), 2000);
+//   });
+// });
+
+// const History = lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("./History/History")), 2000);
+//   });
+// });
 
 const Contact = lazy(() => {
   return new Promise((resolve) => {
@@ -97,11 +86,12 @@ const SignUp = lazy(() => {
   });
 });
 
-const History = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(import("./History/History")), 2000);
-  });
-});
+// GIAI ĐOẠN 1: Loại bỏ History và Profile
+// const History = lazy(() => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(import("./History/History")), 2000);
+//   });
+// });
 
 const Profile = lazy(() => {
   return new Promise((resolve) => {
@@ -139,21 +129,21 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/shop/:id" component={Shop} />
             <Route path="/detail/:id" component={Detail_Product} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/favorite" component={Favorite} />
-
-            <Route exact path="/event" component={Event} />
-            <Route path="/event/:id" component={DetailEvent} />
-
+            
+            {/* GIAI ĐOẠN 1: Loại bỏ các route không cần thiết */}
+            {/* <Route path="/cart" component={Cart} /> */}
+            {/* <Route path="/checkout" component={Checkout} /> */}
+            {/* <Route path="/favorite" component={Favorite} /> */}
+            {/* <Route exact path="/event" component={Event} /> */}
+            {/* <Route path="/event/:id" component={DetailEvent} /> */}
+            {/* <Route path="/success" component={OrderSuccess} /> */}
+            {/* <Route path="/fail" component={OrderFail} /> */}
+            {/* <Route path="/momo" component={OrderMomo} /> */}
+            {/* <Route path="/history" component={History} /> */}
 
             <Route path="/contact" component={Contact} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/success" component={OrderSuccess} />
-            <Route path="/fail" component={OrderFail} />
-            <Route path="/momo" component={OrderMomo} />
-            <Route path="/history" component={History} />
             <Route path="/profile/:id" component={Profile} />
             <Route path="/search" component={Search} />
           </Switch>

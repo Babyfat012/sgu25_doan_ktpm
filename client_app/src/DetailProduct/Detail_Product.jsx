@@ -144,11 +144,12 @@ function Detail_Product(props) {
 
             const post_data = async () => {
 
-                const response = await CommentAPI.post_comment(data, id)
+                // GIAI ĐOẠN 1: Không có CommentAPI
+                // const response = await CommentAPI.post_comment(data, id)
+                // console.log(response)
+                // set_load_comment(true)
 
-                console.log(response)
-
-                set_load_comment(true)
+                console.log('GIAI ĐOẠN 1: Comment feature disabled')
 
                 set_comment('')
 
@@ -173,9 +174,11 @@ function Detail_Product(props) {
         if (load_comment) {
             const fetchData = async () => {
 
-                const response = await CommentAPI.get_comment(id)
+                // GIAI ĐOẠN 1: Không có CommentAPI
+                // const response = await CommentAPI.get_comment(id)
+                // set_list_comment(response)
 
-                set_list_comment(response)
+                set_list_comment([])
 
             }
 
