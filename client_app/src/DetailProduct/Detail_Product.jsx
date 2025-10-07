@@ -174,6 +174,12 @@ function Detail_Product(props) {
             const fetchData = async () => {
 
                 const response = await CommentAPI.get_comment(id)
+                
+                console.log('Comment data:', response)
+                response.forEach((comment, index) => {
+                    console.log(`Comment ${index}:`, comment)
+                    console.log(`User data:`, comment.id_user)
+                })
 
                 set_list_comment(response)
 
