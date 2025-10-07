@@ -77,12 +77,21 @@ module.exports.post_user = async(req, res) => {
     const user = await Users.findOne({ username: req.body.username })
 
     if (user) {
-        res.send("User Da Ton Tai")
+        return res.send("User Da Ton Tai")
     } else {
-        await Users.create(req.body)
+        // Hash mật khẩu trước khi lưu
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        
+        // Tạo object user mới với mật khẩu đã được hash
+        const newUserData = {
+            ...req.body,
+            password: hashedPassword
+        };
+        
+        await Users.create(newUserData)
+        return res.send("Thanh Cong")
     }
-
-    res.send("Thanh Cong")
 
 }
 
@@ -92,7 +101,12 @@ module.exports.update_user = async(req, res) => {
 
     user.fullname = req.body.fullname
     user.username = req.body.username
-    user.password = req.body.password
+    
+    // Hash mật khẩu mới nếu có thay đổi
+    if (req.body.password) {
+        const salt = await bcrypt.genSalt();
+        user.password = await bcrypt.hash(req.body.password, salt);
+    }
 
     user.save()
 
