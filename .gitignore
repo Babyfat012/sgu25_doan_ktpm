@@ -1,21 +1,5 @@
 
-# env & secret mapping
-.env
-*.env
-server_app/.env
-*replace*.txt
 
-# env & secret mapping
-.env
-*.env
-server_app/.env
-*replace*.txt
-
-# env & secret mapping
-.env
-*.env
-server_app/.env
-*replace*.txt
 
 # deps
 node_modules/
