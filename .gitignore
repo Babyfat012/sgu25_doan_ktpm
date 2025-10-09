@@ -16,3 +16,9 @@ server_app/.env
 *.env
 server_app/.env
 *replace*.txt
+
+# deps
+node_modules/
+client_app/node_modules/
+server_app/node_modules/
+admin_app/node_modules/
