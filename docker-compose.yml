@@ -7,6 +7,7 @@ services:
     environment:
       - NODE_ENV=development
       - MONGO_URL=mongodb://mongo:27017/Clothes
+      - STRIPE_SECRET_KEY=sk_test_51SCj0G2OdrtKbthCxKkDG753B1KA18P6Euo89UjoqoryKeXlXAiYSbv5mykOoCdQuj4DOYWh79kHmeo8HiRUAq9300v2svbySx
     depends_on:
       - mongo
     develop:
